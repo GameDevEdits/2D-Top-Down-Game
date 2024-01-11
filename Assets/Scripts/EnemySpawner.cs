@@ -2,40 +2,59 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] objectsToSpawn; // Array of game objects to spawn.
-    public float spawnRadius = 10f;     // The radius within which objects will be spawned.
-    public float spawnInterval = 2f;    // Time interval between spawns.
+    public GameObject[] objectsToSpawn;
+    public float[] spawnChances;
+    public float spawnRadius = 15f; // Radius within which objects will be spawned.
+    public int numberOfEnemiesToSpawn = 5; // Number of enemies to spawn.
 
     private Transform playerTransform;
 
     private void Start()
     {
-        // Find the player's transform.
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
-        // Start spawning objects repeatedly only if the spawner is enabled.
-        if (gameObject.activeSelf && enabled)
-        {
-            InvokeRepeating("SpawnObject", 0f, spawnInterval);
-        }
+        SpawnEnemies();
     }
 
-    private void SpawnObject()
+    public void SpawnEnemies()
     {
-        // Check if the spawner is enabled before attempting to spawn.
         if (!gameObject.activeSelf || !enabled)
         {
             return;
         }
 
-        // Calculate a random position within the spawn radius.
-        Vector2 randomPosition = Random.insideUnitCircle.normalized * spawnRadius;
-        Vector3 spawnPosition = playerTransform.position + new Vector3(randomPosition.x, randomPosition.y, 0f);
+        // Ensure the number of enemies to spawn is not greater than the available options.
+        numberOfEnemiesToSpawn = Mathf.Min(numberOfEnemiesToSpawn, objectsToSpawn.Length);
 
-        // Choose a random object from the array to spawn.
-        GameObject objectToSpawn = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];
+        // Shuffle spawn chances and objects array.
+        ShuffleArrays();
 
-        // Instantiate the selected object at the calculated position.
-        Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+        for (int spawnCount = 0; spawnCount < numberOfEnemiesToSpawn; spawnCount++)
+        {
+            // Calculate a random position within the spawn radius.
+            Vector2 randomPosition = Random.insideUnitCircle.normalized * spawnRadius;
+            Vector3 spawnPosition = playerTransform.position + new Vector3(randomPosition.x, randomPosition.y, 0f);
+
+            // Instantiate the selected object at the calculated position.
+            Instantiate(objectsToSpawn[spawnCount], spawnPosition, Quaternion.identity);
+        }
+    }
+
+    private void ShuffleArrays()
+    {
+        // Simple array shuffle to randomize the order.
+        for (int i = objectsToSpawn.Length - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+
+            // Swap objectsToSpawn array.
+            GameObject tempObject = objectsToSpawn[i];
+            objectsToSpawn[i] = objectsToSpawn[j];
+            objectsToSpawn[j] = tempObject;
+
+            // Swap spawnChances array.
+            float tempChance = spawnChances[i];
+            spawnChances[i] = spawnChances[j];
+            spawnChances[j] = tempChance;
+        }
     }
 }

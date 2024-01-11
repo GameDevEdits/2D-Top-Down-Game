@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpawnerEnablerScript : MonoBehaviour
 {
-    public GameObject objectToActivate; // Drag and drop the GameObject you want to activate in the Inspector
+    public GameObject enemySpawnerObject; // Drag and drop the EnemySpawner GameObject in the Inspector
     public GameObject archwayBlocker;
     public GameObject specificArchway; // Drag and drop the specific Archway GameObject you want to control
 
@@ -17,30 +17,33 @@ public class SpawnerEnablerScript : MonoBehaviour
 
     private IEnumerator ActivateAndDeactivate()
     {
-        if (objectToActivate != null)
+        if (enemySpawnerObject != null)
         {
+            EnemySpawner enemySpawner = enemySpawnerObject.GetComponent<EnemySpawner>();
+
             Debug.Log("Waiting 10 seconds");
             // Step 2: Wait for 10 seconds
             yield return new WaitForSeconds(10f);
 
             Debug.Log("20-second wave 1");
             // Step 3: Enable for 20 seconds
-            objectToActivate.SetActive(true);
+            enemySpawner.SpawnEnemies();
             yield return new WaitForSeconds(20f);
 
             Debug.Log("Waiting 10 seconds");
             // Step 4: Disable for 10 seconds
-            objectToActivate.SetActive(false);
+            enemySpawnerObject.SetActive(false);
             yield return new WaitForSeconds(10f);
 
             Debug.Log("20-second wave 2");
             // Step 5: Enable for 20 seconds
-            objectToActivate.SetActive(true);
+            enemySpawner.SpawnEnemies();
+            enemySpawnerObject.SetActive(true);
             yield return new WaitForSeconds(20f);
 
             Debug.Log("Waves completed!");
             // Step 8: Disable
-            objectToActivate.SetActive(false);
+            enemySpawnerObject.SetActive(false);
             archwayBlocker.SetActive(false);
 
             // Set waves completed for the specific archway
