@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476761264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -318,12 +318,12 @@ MonoBehaviour:
   tileMap: {fileID: 1848925868}
   floor: {fileID: 11400000, guid: 8ef03c4f5af45904d8984c806651213f, type: 2}
   wall: {fileID: 11400000, guid: 31ac1491c92a00c4e9172b66552af452, type: 2}
-  mapWidth: 30
-  mapHeight: 30
-  maximumWalkers: 60
+  mapWidth: 20
+  mapHeight: 20
+  maximumWalkers: 2
   tileCount: 0
   fillPercentage: 0.4
-  waitTime: 0
+  waitTime: 0.05
 --- !u!4 &1154231254
 Transform:
   m_ObjectHideFlags: 0
