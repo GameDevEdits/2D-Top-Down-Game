@@ -30,13 +30,46 @@ public class EnemySpawner : MonoBehaviour
 
         for (int spawnCount = 0; spawnCount < numberOfEnemiesToSpawn; spawnCount++)
         {
-            // Calculate a random position within the spawn radius.
-            Vector2 randomPosition = Random.insideUnitCircle.normalized * spawnRadius;
-            Vector3 spawnPosition = playerTransform.position + new Vector3(randomPosition.x, randomPosition.y, 0f);
+            Vector3 spawnPosition = GetValidSpawnPosition();
 
             // Instantiate the selected object at the calculated position.
             Instantiate(objectsToSpawn[spawnCount], spawnPosition, Quaternion.identity);
         }
+    }
+
+    private Vector3 GetValidSpawnPosition()
+    {
+        Vector3 randomPosition;
+        bool validPosition = false;
+
+        do
+        {
+            // Calculate a random position within the spawn radius.
+            randomPosition = Random.insideUnitCircle * spawnRadius;
+            randomPosition += playerTransform.position;
+
+            // Check the distance from already spawned enemies.
+            validPosition = IsPositionValid(randomPosition);
+
+        } while (!validPosition);
+
+        return randomPosition;
+    }
+
+    private bool IsPositionValid(Vector3 position)
+    {
+        // Check the distance from already spawned enemies.
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 3f);
+
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private void ShuffleArrays()

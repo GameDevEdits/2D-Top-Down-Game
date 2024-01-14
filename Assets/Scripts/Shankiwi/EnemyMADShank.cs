@@ -1,13 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMADShank : MonoBehaviour
 {
+    public float initialFreezeDuration = 2f; // Time to freeze speed at the start
     public float speed;
     public float checkRadius;
     public float attackRadius;
-    public float avoidanceRadius; // Set the desired avoidance radius.
+    public float avoidanceRadius;
 
     public LayerMask whatIsPlayer;
 
@@ -27,13 +27,21 @@ public class EnemyMADShank : MonoBehaviour
     private float lastShotTime;
     public float shootInterval = 1f;
 
-    private bool isAttacking; // Added to track if the enemy is attacking
+    private bool isAttacking;
+
+    private float originalSpeed; // Store the original speed before freezing
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").transform;
+
+        // Store the original speed
+        originalSpeed = speed;
+
+        // Freeze speed at the start for initialFreezeDuration seconds
+        StartCoroutine(FreezeSpeed(initialFreezeDuration));
     }
 
     private void Update()
@@ -45,10 +53,8 @@ public class EnemyMADShank : MonoBehaviour
         dir.Normalize();
         movement = dir;
 
-        // Avoidance behavior
         AvoidOtherEnemies();
 
-        // Set animation based on whether the enemy is attacking
         if (isInAttackRange)
         {
             isAttacking = true;
@@ -60,7 +66,6 @@ public class EnemyMADShank : MonoBehaviour
 
         anim.SetBool("isRunning", isInChaseRange && !isAttacking);
 
-        // Update the animator parameters
         anim.SetFloat("X", dir.x);
         anim.SetFloat("Y", dir.y);
         anim.SetBool("isAttacking", isAttacking);
@@ -81,7 +86,11 @@ public class EnemyMADShank : MonoBehaviour
 
     private void MoveCharacter(Vector2 dir)
     {
-        rb.MovePosition((Vector2)transform.position + (dir * speed * Time.deltaTime));
+        // Check if the initial freeze duration has passed
+        if (Time.timeSinceLevelLoad > initialFreezeDuration)
+        {
+            rb.MovePosition((Vector2)transform.position + (dir * speed * Time.deltaTime));
+        }
     }
 
     private void Shoot()
@@ -100,7 +109,6 @@ public class EnemyMADShank : MonoBehaviour
         }
     }
 
-    // Function to avoid other enemies within the specified radius.
     private void AvoidOtherEnemies()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
@@ -109,11 +117,8 @@ public class EnemyMADShank : MonoBehaviour
         {
             if (collider.CompareTag("Enemy") && collider.transform != transform)
             {
-                // Calculate avoidance vector and normalize it.
                 Vector2 avoidVector = transform.position - collider.transform.position;
                 avoidVector.Normalize();
-
-                // Adjust the movement direction to avoid the nearby enemy.
                 movement += avoidVector;
             }
         }
@@ -128,4 +133,10 @@ public class EnemyMADShank : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, checkRadius);
     }
 
+    private IEnumerator FreezeSpeed(float duration)
+    {
+        speed = 0f; // Freeze the speed
+        yield return new WaitForSeconds(duration);
+        speed = originalSpeed; // Unfreeze the speed after the duration
+    }
 }

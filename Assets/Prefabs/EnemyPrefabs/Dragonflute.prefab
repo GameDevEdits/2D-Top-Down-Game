@@ -141,6 +141,8 @@ GameObject:
   - component: {fileID: 3516090875077920819}
   - component: {fileID: 3516090875077920816}
   - component: {fileID: 3516090875077920817}
+  - component: {fileID: 5942186626143023615}
+  - component: {fileID: 6940414212634838316}
   m_Layer: 6
   m_Name: Dragonflute
   m_TagString: Enemy
@@ -157,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 1845944234752450698}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 315.2, y: 100.52, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1845944233709262730}
@@ -207,7 +209,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 101
-  m_Sprite: {fileID: 1185459325, guid: 4499011be03150546b8f8fee29cef3cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c47956e0f401fd408ec6372426caf0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -325,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6190563dcb04a3c4da42655f5166e1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialFreezeDuration: 2
   speed: 2.5
   checkRadius: 20
   attackRadius: 5
@@ -718,6 +721,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5942186626143023615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845944234752450698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1ee7f2c39aa1946bf53b33d17c35b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6940414212634838316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845944234752450698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7b841a3c2869d4b90fa6d61dc9c3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1845944234976677268
 GameObject:
   m_ObjectHideFlags: 0

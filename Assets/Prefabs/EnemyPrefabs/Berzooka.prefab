@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: -6823728162516278470}
   - component: {fileID: -5677308591554685374}
   - component: {fileID: 4903883441791696950}
+  - component: {fileID: 5777891779256702526}
+  - component: {fileID: 7339075584008740055}
   m_Layer: 6
   m_Name: Berzooka
   m_TagString: Enemy
@@ -90,7 +92,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 102
-  m_Sprite: {fileID: 21300000, guid: 2cccb0214254c7f4db5eb967a5c1779d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b0ae5d7743a58a478993815c50d2e3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -490,6 +492,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5777891779256702526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748456785304379341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1ee7f2c39aa1946bf53b33d17c35b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7339075584008740055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748456785304379341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7b841a3c2869d4b90fa6d61dc9c3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &748456785374414889
 GameObject:
   m_ObjectHideFlags: 0

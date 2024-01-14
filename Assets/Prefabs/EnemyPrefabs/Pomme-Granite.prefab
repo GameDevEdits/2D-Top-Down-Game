@@ -59,6 +59,8 @@ GameObject:
   - component: {fileID: 6667053895359825191}
   - component: {fileID: 1525850556551688334}
   - component: {fileID: -751682632751504238}
+  - component: {fileID: 2296092977675205049}
+  - component: {fileID: 4256464713324912722}
   m_Layer: 6
   m_Name: Pomme-Granite
   m_TagString: Enemy
@@ -126,7 +128,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 105
-  m_Sprite: {fileID: 1590753277, guid: 09bcbf72bde600e488a42bd031302825, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22e05195f3ffc8b4d84998ec4ae3e705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -660,6 +662,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2296092977675205049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004118565936025075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1ee7f2c39aa1946bf53b33d17c35b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4256464713324912722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004118565936025075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7b841a3c2869d4b90fa6d61dc9c3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5004118565957144969
 GameObject:
   m_ObjectHideFlags: 0

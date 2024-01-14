@@ -53,6 +53,8 @@ GameObject:
   - component: {fileID: 6635012757779750533}
   - component: {fileID: 2610478515172216020}
   - component: {fileID: 287502978332655077}
+  - component: {fileID: 3529504109145101996}
+  - component: {fileID: 284248749065244658}
   m_Layer: 6
   m_Name: Avacabowl
   m_TagString: Enemy
@@ -119,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 101
-  m_Sprite: {fileID: 21300000, guid: e50d20c7acbb5cc439ef0f4798faef4f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 299fce9c520789342bf499c4f8f1110d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -410,6 +412,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3529504109145101996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449309764113872442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1ee7f2c39aa1946bf53b33d17c35b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &284248749065244658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449309764113872442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7b841a3c2869d4b90fa6d61dc9c3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8449309764372959361
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,6 +29,8 @@ GameObject:
   - component: {fileID: 4758299989762676514}
   - component: {fileID: -8938459108402840066}
   - component: {fileID: -118240249375307967}
+  - component: {fileID: 6298409029885686063}
+  - component: {fileID: 2718493005993695202}
   m_Layer: 6
   m_Name: PewPewPeach
   m_TagString: Enemy
@@ -95,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 104
-  m_Sprite: {fileID: 21300000, guid: 2b3a1e27ccfa0e143892456085a146f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a2cb2e62b97dcc478e179ca2f8b6737, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -810,6 +812,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6298409029885686063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538876176070755852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1ee7f2c39aa1946bf53b33d17c35b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2718493005993695202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538876176070755852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7b841a3c2869d4b90fa6d61dc9c3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4538876176882001837
 GameObject:
   m_ObjectHideFlags: 0

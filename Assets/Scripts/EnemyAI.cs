@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // Add this for TextMeshPro
+using TMPro;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -22,23 +21,26 @@ public class EnemyAI : MonoBehaviour
 
     public ScoreScriptableObject scoreScriptableObject;
 
-    public PommeBlock pommeBlock; // Drag and drop your PommeBlock script in the Inspector.
-    public AudioSource chosenAudioSource; // Assign this in the Inspector.
+    public PommeBlock pommeBlock;
+    public AudioSource chosenAudioSource;
 
-    public float blockCooldown = 1f; // Add a public variable for the block cooldown
+    public float blockCooldown = 1f;
+    private bool isBlockingOnCooldown = false;
 
-    private bool isBlockingOnCooldown = false; // Flag to track if blocking is on cooldown
+    private bool canTakeDamage = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
+
+        StartCoroutine(DelayVulnerability());
     }
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && canTakeDamage)
         {
             Vector2 direction = player.position - transform.position;
             direction.Normalize();
@@ -60,7 +62,7 @@ public class EnemyAI : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!isDead && (pommeBlock == null || !pommeBlock.IsBlocking()))
+        if (!isDead && canTakeDamage && (pommeBlock == null || !pommeBlock.IsBlocking()))
         {
             currentHealth -= damage;
 
@@ -71,13 +73,10 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
-    // Function to handle the death of the enemy.
     public void Die()
     {
-        isDead = true;  // Set the flag to indicate that the enemy is dead.
+        isDead = true;
 
-        // Disable all currently playing audio sources
         AudioSource[] audioSources = GetComponents<AudioSource>();
         foreach (var audioSource in audioSources)
         {
@@ -87,8 +86,6 @@ public class EnemyAI : MonoBehaviour
 
         chosenAudioSource.enabled = true;
 
-
-        // Trigger the "isDead" parameter in the Animator to play the die animation.
         anim.SetBool("isDead", true);
 
         if (playerTimer != null)
@@ -101,35 +98,30 @@ public class EnemyAI : MonoBehaviour
             scoreManager.HandleEnemyDeath(gameObject);
         }
 
-        // Increment the score
         IncrementScore();
         IncrementKills();
 
         StartCoroutine(DelayedSortingOrderChange());
 
-        // You may also want to disable any enemy components like movement scripts, shooting scripts, etc.
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocity = Vector2.zero; // Stop rigidbody movement
-            rb.gravityScale = 0f; // Disable gravity (if applicable)
-            rb.isKinematic = true; // Make the rigidbody kinematic
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0f;
+            rb.isKinematic = true;
         }
 
-        // Disable the Collider2D component to prevent further interactions with the player.
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null)
         {
             collider.enabled = false;
         }
 
-        //Disable children
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
         }
 
-        // Disable the "MyScript" component.
         EnemyAI myScriptComponentOne = GetComponent<EnemyAI>();
         if (myScriptComponentOne != null)
         {
@@ -171,7 +163,6 @@ public class EnemyAI : MonoBehaviour
         {
             myScriptComponentSeven.enabled = false;
         }
-        // Optionally, you can disable the collider to prevent further interactions with the player.
     }
 
     void StartAudioAgain()
@@ -192,16 +183,11 @@ public class EnemyAI : MonoBehaviour
     {
         scoreScriptableObject.AddScore(scoreIncrement);
 
-        // Check if the scoreText is assigned
         if (scoreText != null)
         {
-            // Parse the current score text
             if (int.TryParse(scoreText.text, out int currentScore))
             {
-                // Increment the score
                 currentScore += (int)scoreIncrement;
-
-                // Update the score text
                 scoreText.text = currentScore.ToString();
             }
         }
@@ -209,16 +195,13 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator DelayedSortingOrderChange()
     {
-        yield return null;  // Wait for the next frame.
+        yield return null;
 
-        // Change sorting order.
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
             spriteRenderer.sortingOrder -= 10;
         }
-
-        // Optionally, you can disable the collider to prevent further interactions with the player.
     }
 
     IEnumerator BlockCooldown()
@@ -226,5 +209,11 @@ public class EnemyAI : MonoBehaviour
         isBlockingOnCooldown = true;
         yield return new WaitForSeconds(blockCooldown);
         isBlockingOnCooldown = false;
+    }
+
+    IEnumerator DelayVulnerability()
+    {
+        yield return new WaitForSeconds(2f);
+        canTakeDamage = true;
     }
 }

@@ -17,20 +17,15 @@ public class IdleController : MonoBehaviour
         bool anyKeyIsPressed = Input.anyKey;
 
         // Check for specific keys and their last key up
-        if (Input.GetKeyUp(KeyCode.A) && !anyKeyIsPressed)
+        if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W)) && !anyKeyIsPressed)
         {
-            // Last key up is A and no other keys are being pressed
+            // Last key up is A or W and no other keys are being pressed
             SetAnimatorState(true, false);
         }
-        else if (Input.GetKeyUp(KeyCode.D) && !anyKeyIsPressed)
+        else if ((Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.S)) && !anyKeyIsPressed)
         {
-            // Last key up is D and no other keys are being pressed
+            // Last key up is D or S and no other keys are being pressed
             SetAnimatorState(false, true);
-        }
-        else if ((Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)) && !anyKeyIsPressed)
-        {
-            // Last key up is W or S and no other keys are being pressed
-            SetAnimatorState(false, false);
         }
         else
         {
