@@ -9,6 +9,7 @@ public class WalkerGenerator : MonoBehaviour
 	{
 		FLOOR,
 		WALL,
+		TWALL,
 		EMPTY
 	}
 	
@@ -18,6 +19,7 @@ public class WalkerGenerator : MonoBehaviour
 	public Tilemap tileMap;
 	public Tile floor;
 	public Tile wall;
+	public Tile tWall;
 	public int mapWidth = 30;
 	public int mapHeight = 30;
 	
@@ -199,6 +201,34 @@ public class WalkerGenerator : MonoBehaviour
 					}
 					
 					if(hasCreatedWall)
+					{
+						yield return new WaitForSeconds(waitTime);
+					}
+				}
+			}
+		}
+		
+		StartCoroutine(CreateTWalls());
+	}
+	
+	IEnumerator CreateTWalls()
+	{
+		for (int x = 0; x < gridHandler.GetLength(0) - 2; x++)
+		{
+			for (int y = 0; y < gridHandler.GetLength(1) - 2; y++)
+			{
+				if(gridHandler[x, y] == Grid.WALL)
+				{
+					bool hasCreatedTWall = false;
+					
+					if(gridHandler[x, y + 1] == Grid.EMPTY)
+					{
+						tileMap.SetTile(new Vector3Int(x, y + 1, 0), tWall);
+						gridHandler[x, y+1] = Grid.TWALL;
+						hasCreatedTWall = true;
+					}
+					
+					if(hasCreatedTWall)
 					{
 						yield return new WaitForSeconds(waitTime);
 					}
