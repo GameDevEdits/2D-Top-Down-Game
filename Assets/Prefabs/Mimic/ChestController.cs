@@ -1,54 +1,51 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ChestController : MonoBehaviour
 {
-    public Animator chestAnimator;
-    public float interactionRadius = 2f;
-    public LayerMask playerLayer;
-    public GameObject[] itemPrefabs;
+    public Animator animator;
+    public List<GameObject> itemsToSpawn;
+    public Transform spawnPoint; // Set this in the Inspector to determine where items will spawn
 
-    private bool isOpened = false;
-
-    void Update()
+    void Start()
     {
-        if (!isOpened && Input.GetButtonDown("Interact"))
+        if (animator == null)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius, playerLayer);
-
-            foreach (Collider collider in colliders)
-            {
-                if (collider.CompareTag("Player"))
-                {
-                    OpenChest();
-                    break;
-                }
-            }
+            Debug.LogError("ChestController: Animator is not assigned!");
         }
     }
 
-    void OpenChest()
+    public void OpenChest()
     {
-        isOpened = true; // Prevents repeated opening
-
-        chestAnimator.SetBool("OpenChest", true);
-
-        // Spawn a random item
-        if (itemPrefabs != null && itemPrefabs.Length > 0)
-        {
-            GameObject randomItemPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
-            Instantiate(randomItemPrefab, transform.position + Vector3.up, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogWarning("Item prefabs array is empty or null.");
-        }
+        StartCoroutine(DelayedOpenChest());
     }
 
-    // Draw the interaction radius in the scene view
-    private void OnDrawGizmosSelected()
+    IEnumerator DelayedOpenChest()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, interactionRadius);
+        // Wait for 0.5 seconds before opening the chest
+        yield return new WaitForSeconds(0.5f);
+
+        // Assuming you have an Animator parameter named "OpenChest" for chest opening animation
+        if (animator != null)
+        {
+            animator.SetBool("OpenChest", true);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        SpawnRandomItem();
+    }
+
+    void SpawnRandomItem()
+    {
+        if (itemsToSpawn.Count > 0)
+        {
+            int randomIndex = Random.Range(0, itemsToSpawn.Count);
+            GameObject itemPrefab = itemsToSpawn[randomIndex];
+
+            // Spawn the item at the specified spawn point or chest's position if spawnPoint is not set
+            Vector3 spawnPosition = (spawnPoint != null) ? spawnPoint.position : transform.position;
+            Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
+        }
     }
 }

@@ -1,12 +1,20 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class SpawnerEnablerScript : MonoBehaviour
 {
-    public GameObject wave1SpawnerObject; // Drag and drop the first EnemySpawner GameObject in the Inspector
-    public GameObject wave2SpawnerObject; // Drag and drop the second EnemySpawner GameObject in the Inspector
+    public GameObject wave1SpawnerObject;
+    public GameObject wave2SpawnerObject;
     public GameObject archwayBlocker;
-    public GameObject specificArchway; // Drag and drop the specific Archway GameObject you want to control
+    public GameObject specificArchway;
+
+    public TextMeshProUGUI wave1StartText;
+    public TextMeshProUGUI wave1TimerText;
+    public TextMeshProUGUI wave1TimeCompletedText;
+    public TextMeshProUGUI wave2StartingText;
+    public TextMeshProUGUI wave2TimerText;
+    public TextMeshProUGUI wavesCompletedText;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -18,35 +26,64 @@ public class SpawnerEnablerScript : MonoBehaviour
 
     private IEnumerator ActivateAndDeactivate()
     {
+        // Disable collider
+        GetComponent<Collider2D>().enabled = false;
+
         if (wave1SpawnerObject != null && wave2SpawnerObject != null)
         {
             EnemySpawner wave1Spawner = wave1SpawnerObject.GetComponent<EnemySpawner>();
             EnemySpawner wave2Spawner = wave2SpawnerObject.GetComponent<EnemySpawner>();
 
-            Debug.Log("Waiting 3 seconds");
-            // Step 2: Wait for 10 seconds
+            // Step 1: Enable "Room 1: Wave 1" text
+            wave1StartText.gameObject.SetActive(true);
             yield return new WaitForSeconds(3f);
 
-            Debug.Log("20-second wave 1");
-            // Step 3: Enable Wave 1 for 20 seconds
+            // Step 2: Disable "Room 1: Wave 1" text
+            wave1StartText.gameObject.SetActive(false);
+
+            Debug.Log("15-second wave 1");
+            // Step 3: Enable Wave 1 Timer text for 15 seconds
+            wave1TimerText.gameObject.SetActive(true);
             wave1Spawner.SpawnEnemies();
             wave1SpawnerObject.SetActive(true);
-            yield return new WaitForSeconds(20f);
+            float wave1Timer = 15f;
+            while (wave1Timer > 0f)
+            {
+                wave1Timer -= Time.deltaTime;
+                wave1TimerText.text = "Wave 1 Timer: " + Mathf.CeilToInt(wave1Timer);
+                yield return null;
+            }
 
-            Debug.Log("Waiting 10 seconds");
-            // Step 4: Disable Wave 1 for 10 seconds
-            wave1SpawnerObject.SetActive(false);
-            yield return new WaitForSeconds(10f);
+            // Step 4: Disable Wave 1 Timer text
+            wave1TimerText.gameObject.SetActive(false);
 
-            Debug.Log("20-second wave 2");
-            // Step 5: Enable Wave 2 for 20 seconds
+            // Step 5: Enable "Wave 1 Time Completed" and "Wave 2 Starting In: " text
+            wave1TimeCompletedText.gameObject.SetActive(true);
+            wave2StartingText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(5f);
+
+            // Step 6: Disable "Wave 1 Time Completed" and "Wave 2 Starting In: " text
+            wave1TimeCompletedText.gameObject.SetActive(false);
+            wave2StartingText.gameObject.SetActive(false);
+
+            Debug.Log("15-second wave 2");
+            // Step 7: Enable Wave 2 Timer text for 15 seconds
+            wave2TimerText.gameObject.SetActive(true);
             wave2Spawner.SpawnEnemies();
             wave2SpawnerObject.SetActive(true);
-            yield return new WaitForSeconds(20f);
+            float wave2Timer = 15f;
+            while (wave2Timer > 0f)
+            {
+                wave2Timer -= Time.deltaTime;
+                wave2TimerText.text = "Wave 2 Timer: " + Mathf.CeilToInt(wave2Timer);
+                yield return null;
+            }
 
-            Debug.Log("Waves completed!");
-            // Step 8: Disable Wave 2
-            wave2SpawnerObject.SetActive(false);
+            // Step 8: Disable Wave 2 Timer text
+            wave2TimerText.gameObject.SetActive(false);
+
+            // Step 9: Enable "Waves Completed!" text
+            wavesCompletedText.gameObject.SetActive(true);
             archwayBlocker.SetActive(false);
 
             // Set waves completed for the specific archway
@@ -58,6 +95,9 @@ public class SpawnerEnablerScript : MonoBehaviour
                     affectedArchwayController.SetWavesCompleted(true);
                 }
             }
+
+            yield return new WaitForSeconds(5f);
+            wavesCompletedText.gameObject.SetActive(false);
         }
     }
 }
