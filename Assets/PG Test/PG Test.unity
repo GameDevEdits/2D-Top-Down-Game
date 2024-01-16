@@ -299,7 +299,7 @@ GameObject:
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -316,14 +316,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMap: {fileID: 1848925868}
-  floor: {fileID: 11400000, guid: 8ef03c4f5af45904d8984c806651213f, type: 2}
-  wall: {fileID: 11400000, guid: 31ac1491c92a00c4e9172b66552af452, type: 2}
-  mapWidth: 20
-  mapHeight: 20
-  maximumWalkers: 2
+  floor: {fileID: 11400000, guid: c7cae80bddc984d4b855dfb56917e708, type: 2}
+  wall: {fileID: 11400000, guid: 1e5a992cf12b7464eadaf41558d8d5d7, type: 2}
+  tWall: {fileID: 11400000, guid: 779fa52d98ebb51498bc3377ae40a652, type: 2}
+  mapWidth: 60
+  mapHeight: 60
+  maximumWalkers: 20
   tileCount: 0
   fillPercentage: 0.4
-  waitTime: 0.05
+  waitTime: 0
 --- !u!4 &1154231254
 Transform:
   m_ObjectHideFlags: 0
