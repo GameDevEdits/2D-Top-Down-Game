@@ -318,7 +318,10 @@ MonoBehaviour:
   tileMap: {fileID: 1848925868}
   floor: {fileID: 11400000, guid: c7cae80bddc984d4b855dfb56917e708, type: 2}
   wall: {fileID: 11400000, guid: 1e5a992cf12b7464eadaf41558d8d5d7, type: 2}
-  tWall: {fileID: 11400000, guid: 779fa52d98ebb51498bc3377ae40a652, type: 2}
+  tWall: {fileID: 11400000, guid: 7be9421ff0b8b8c4fb0ceaa8a669d3c0, type: 2}
+  enemy: {fileID: 11400000, guid: 2b3b9dacd44f2fa488f2ecba8556ff4b, type: 2}
+  enemyCount: 0
+  maxEnemyCount: 0
   mapWidth: 60
   mapHeight: 60
   maximumWalkers: 20

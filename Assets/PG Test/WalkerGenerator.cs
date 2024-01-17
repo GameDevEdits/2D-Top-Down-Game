@@ -10,6 +10,7 @@ public class WalkerGenerator : MonoBehaviour
 		FLOOR,
 		WALL,
 		TWALL,
+		ENEMY,
 		EMPTY
 	}
 	
@@ -20,6 +21,9 @@ public class WalkerGenerator : MonoBehaviour
 	public Tile floor;
 	public Tile wall;
 	public Tile tWall;
+	public Tile enemy;
+	public int enemyCount = 0;
+	public int maxEnemyCount;
 	public int mapWidth = 30;
 	public int mapHeight = 30;
 	
@@ -31,6 +35,7 @@ public class WalkerGenerator : MonoBehaviour
 	void Start()
 	{
 		InitializeGrid();
+		maxEnemyCount = Random.Range(5, 20);
 	}
 	
 	void InitializeGrid()
@@ -213,22 +218,43 @@ public class WalkerGenerator : MonoBehaviour
 	
 	IEnumerator CreateTWalls()
 	{
-		for (int x = 0; x < gridHandler.GetLength(0) - 2; x++)
+		for (int x = 0; x < gridHandler.GetLength(0); x++)
 		{
-			for (int y = 0; y < gridHandler.GetLength(1) - 2; y++)
+			for (int y = 0; y < gridHandler.GetLength(1); y++)
 			{
-				if(gridHandler[x, y] == Grid.WALL)
+				if(gridHandler[x, y] == Grid.WALL && gridHandler[x, y+1] != Grid.WALL)
 				{
 					bool hasCreatedTWall = false;
-					
-					if(gridHandler[x, y + 1] == Grid.EMPTY)
-					{
-						tileMap.SetTile(new Vector3Int(x, y + 1, 0), tWall);
-						gridHandler[x, y+1] = Grid.TWALL;
-						hasCreatedTWall = true;
-					}
+					tileMap.SetTile(new Vector3Int(x, y + 1, 0), tWall);
+					gridHandler[x, y+1] = Grid.TWALL;
+					hasCreatedTWall = true;
 					
 					if(hasCreatedTWall)
+					{
+						yield return new WaitForSeconds(waitTime);
+					}
+				}
+			}
+		}
+		
+		StartCoroutine(CreateEnemies());
+	}
+	
+	IEnumerator CreateEnemies()
+	{
+		for(int x = 0; x < gridHandler.GetLength(0); x++)
+		{
+			for(int y = 0; y < gridHandler.GetLength(1); y++)
+			{
+				if(gridHandler[x, y] == Grid.FLOOR && enemyCount < maxEnemyCount)
+				{
+					bool hasCreatedEnemy = false;
+					tileMap.SetTile(new Vector3Int(x, y, 1), enemy);
+					gridHandler[x, y] = Grid.ENEMY;
+					hasCreatedEnemy = true;
+					enemyCount++;
+					
+					if(hasCreatedEnemy)
 					{
 						yield return new WaitForSeconds(waitTime);
 					}
