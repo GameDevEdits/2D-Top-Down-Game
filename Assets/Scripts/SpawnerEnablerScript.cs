@@ -41,12 +41,12 @@ public class SpawnerEnablerScript : MonoBehaviour
             // Step 2: Disable "Room 1: Wave 1" text
             wave1StartText.gameObject.SetActive(false);
 
-            Debug.Log("15-second wave 1");
+            Debug.Log("20-second wave 1");
             // Step 3: Enable Wave 1 Timer text for 15 seconds
             wave1TimerText.gameObject.SetActive(true);
             wave1Spawner.SpawnEnemies();
             wave1SpawnerObject.SetActive(true);
-            float wave1Timer = 15f;
+            float wave1Timer = 20f;
             while (wave1Timer > 0f)
             {
                 wave1Timer -= Time.deltaTime;
@@ -66,12 +66,12 @@ public class SpawnerEnablerScript : MonoBehaviour
             wave1TimeCompletedText.gameObject.SetActive(false);
             wave2StartingText.gameObject.SetActive(false);
 
-            Debug.Log("15-second wave 2");
+            Debug.Log("20-second wave 2");
             // Step 7: Enable Wave 2 Timer text for 15 seconds
             wave2TimerText.gameObject.SetActive(true);
             wave2Spawner.SpawnEnemies();
             wave2SpawnerObject.SetActive(true);
-            float wave2Timer = 15f;
+            float wave2Timer = 20f;
             while (wave2Timer > 0f)
             {
                 wave2Timer -= Time.deltaTime;
@@ -93,6 +93,7 @@ public class SpawnerEnablerScript : MonoBehaviour
                 if (affectedArchwayController != null)
                 {
                     affectedArchwayController.SetWavesCompleted(true);
+                    affectedArchwayController.OpenArchway();
                 }
             }
 

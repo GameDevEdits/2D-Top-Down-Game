@@ -34,4 +34,9 @@ public class AffectedArchwayController : MonoBehaviour
             }
         }
     }
+
+    public void OpenArchway()
+    {
+        animator.SetBool("openArchway", true);
+    }
 }

@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashDuration: 0.05
-  flashColor: {r: 0, g: 0, b: 0, a: 1}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &1845944234752450694
 MonoBehaviour:
   m_ObjectHideFlags: 0
