@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 3487374871054406433}
   - component: {fileID: 3289149862085665745}
   - component: {fileID: -1267217808799514977}
+  - component: {fileID: 2426461051101451237}
   - component: {fileID: 8537717938586622857}
+  - component: {fileID: 7668148899239144143}
   m_Layer: 0
   m_Name: Bullet 3
   m_TagString: PlayerBullet
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 101
+  m_SortingOrder: 500
   m_Sprite: {fileID: 21300000, guid: dd5afa501a0a9a54bab676335ba14a1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -134,6 +136,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!95 &2426461051101451237
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989057312661892431}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 110088b589407194cbd78390b6db26b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8537717938586622857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +170,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   damage: 25
+  explodeAnimationDuration: 1
+  bulletTime: 0.09
+--- !u!114 &7668148899239144143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989057312661892431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7b841a3c2869d4b90fa6d61dc9c3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

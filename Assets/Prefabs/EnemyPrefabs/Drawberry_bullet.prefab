@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 932608243298280946}
   - component: {fileID: 8415432375391617229}
   - component: {fileID: 1202446942842129997}
+  - component: {fileID: 2078829625045686317}
   - component: {fileID: 3302352080526376225}
-  - component: {fileID: 1284920700932329998}
+  - component: {fileID: 5059186180442247956}
   - component: {fileID: -4268284037960351170}
   m_Layer: 8
   m_Name: Drawberry_bullet
@@ -126,6 +127,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!95 &2078829625045686317
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439755286064545355}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 18a847766fe704546b3b7ebafd4c24d8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3302352080526376225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 50
---- !u!114 &1284920700932329998
+--- !u!114 &5059186180442247956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,9 +169,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 439755286064545355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5753ce1e1fb9a4cadb79ef20f52d0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 94ee30928e86144489891b9f2fa47a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 2078829625045686317}
 --- !u!114 &-4268284037960351170
 MonoBehaviour:
   m_ObjectHideFlags: 0

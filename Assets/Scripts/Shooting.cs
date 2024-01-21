@@ -50,8 +50,7 @@ public class Shooting : MonoBehaviour
         // Attach a script to the bullet to handle collisions
         bullet.AddComponent<BulletCollisionHandler>();
 
-        // Destroy the bullet after a certain time
-        Destroy(bullet, bulletTime);
+        // Don't destroy the bullet immediately, let the BulletController handle it.
     }
 
     IEnumerator FireRateCooldown()

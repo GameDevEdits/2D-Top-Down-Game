@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour
 
     private bool canTakeDamage = false;
 
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
