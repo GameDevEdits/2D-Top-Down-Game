@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845944233709262731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.49, y: -0.31, z: 0}
+  m_LocalPosition: {x: 1.194, y: -0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1845944234752450692}
   - component: {fileID: 1845944234752450693}
   - component: {fileID: 1845944234752450694}
-  - component: {fileID: 5063748880051433053}
+  - component: {fileID: 286016887352154346}
   - component: {fileID: 1845944234752450696}
   - component: {fileID: 1845944234752450688}
   - component: {fileID: 3516090875077920821}
@@ -339,7 +339,7 @@ MonoBehaviour:
   bulletSpeed: 20
   bulletDamage: 100
   shootInterval: 5
---- !u!114 &5063748880051433053
+--- !u!114 &286016887352154346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,15 +348,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1845944234752450698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 528d9d49969acbe4199faa7c0571d779, type: 3}
+  m_Script: {fileID: 11500000, guid: 02c92e26bfb40f34783f3c42a5c3ffba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6105145299025315684, guid: 78f82029f5417a14fa2c673d27f4f6b5, type: 3}
-  bulletSpeed: 15
-  bulletDamage: 0
-  dartSpreadAngle: 30
-  verticalOffset: 0
+  bulletPrefab: {fileID: 6105145299025315684, guid: 8a54c5fc7d85a944589d0776d4638619, type: 3}
+  bulletSpeed: 10
   firePoint: {fileID: 1845944233709262730}
+  spreadAngle: 15
 --- !u!114 &1845944234752450696
 MonoBehaviour:
   m_ObjectHideFlags: 0
