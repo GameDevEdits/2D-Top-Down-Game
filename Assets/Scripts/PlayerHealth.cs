@@ -25,10 +25,7 @@ public class PlayerHealth : MonoBehaviour
 
     public GameObject enemySpawner; // Reference to the EnemySpawner GameObject
 
-    public bool IsBlocking()
-    {
-        return isBlocking;
-    }
+    private List<GameObject> uiElements = new List<GameObject>(); // List to store UI elements
 
     private void Start()
     {
@@ -48,6 +45,9 @@ public class PlayerHealth : MonoBehaviour
 
         // Initialize cooldown timer
         blockCooldownTimer = 0.0f;
+
+        // Find and store all UI elements in the scene
+        FindAndStoreUIElements();
     }
 
     private void Update()
@@ -62,6 +62,30 @@ public class PlayerHealth : MonoBehaviour
             if (!animator.GetBool("isRolling"))
             {
                 StartBlocking();
+            }
+        }
+    }
+
+    private void FindAndStoreUIElements()
+    {
+        // Find all game objects with the tag "UI"
+        GameObject[] uiObjects = GameObject.FindGameObjectsWithTag("UI");
+
+        // Add UI elements to the list
+        foreach (GameObject uiObject in uiObjects)
+        {
+            uiElements.Add(uiObject);
+        }
+    }
+
+    private void DisableUI()
+    {
+        // Disable all UI elements in the list
+        foreach (GameObject uiElement in uiElements)
+        {
+            if (uiElement != null)
+            {
+                uiElement.SetActive(false);
             }
         }
     }
@@ -89,6 +113,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // Method to gain health
+    public void GainHealth(int amount)
+    {
+        // Increment the current health by the specified amount
+        currentHealth += amount;
+
+        // Clamp the current health to not exceed the maximum health
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+    }
+
     // Method to handle player's death
     private void Die()
     {
@@ -105,6 +139,9 @@ public class PlayerHealth : MonoBehaviour
 
             // Disable player controls and interactions
             DisablePlayer();
+
+            // Disable all UI elements
+            DisableUI();
         }
     }
 
@@ -239,5 +276,11 @@ public class PlayerHealth : MonoBehaviour
         }
 
         animator.SetBool("isBlocking", false);
+    }
+
+    // Inside the PlayerHealth class
+    public bool IsBlocking()
+    {
+        return isBlocking;
     }
 }

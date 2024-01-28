@@ -4,7 +4,8 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float speed = 10f;   // Bullet speed.
-    public int damage = 20;     // Damage dealt by the bullet.
+    public int damage = 20; // Base damage dealt by the bullet.
+    public float criticalHitChance = 0.2f; // Chance for a critical hit (20%).
 
     private Animator bulletAnimator;
     private Rigidbody2D rb;
@@ -22,6 +23,25 @@ public class BulletController : MonoBehaviour
 
         // Start the coroutine to handle "rippleHit" after bullet time is over.
         StartCoroutine(SetRippleHitAfterBulletTime());
+
+        // Check for a critical hit.
+    }
+
+    private void CheckForCriticalHit()
+    {
+        // Generate a random value between 0 and 1.
+        float randomValue = Random.value;
+
+        // Check if the random value is within the critical hit chance.
+        if (randomValue <= criticalHitChance)
+        {
+            // Apply the critical hit by multiplying the base damage.
+            damage *= 2;
+
+            // Set the "criticalHit" parameter to true for the explode animation.
+            bulletAnimator.SetBool("criticalHit", true);
+            Debug.Log("Crit!");
+        }
     }
 
     private void Update()
@@ -56,6 +76,8 @@ public class BulletController : MonoBehaviour
                     // Trigger an animation event to resume taking damage.
                     pommeBlock.SendMessage("ResumeDamage", SendMessageOptions.DontRequireReceiver);
                 }
+
+                CheckForCriticalHit();
 
                 // Apply damage to the enemy.
                 enemy.TakeDamage(damage);

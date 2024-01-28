@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   damage: 25
+  criticalHitChance: 0.1
   explodeAnimationDuration: 1
   bulletTime: 0.09
 --- !u!114 &7668148899239144143
