@@ -1,0 +1,9 @@
+Avacabowl - Whole animation loops
+Berzooka - Whole animation loops
+Dragonflute - Last 3 frames loop
+Drawberry - Last 3 frames loop
+Mimic - Whole animation loops
+Pewpewpeach - last 4 frames loop
+Pomme-granite - Last 19 frames loop
+Raspbomb - Whole animation loops
+Shankiwi - Last 6 frames loop
