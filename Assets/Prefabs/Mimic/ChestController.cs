@@ -5,16 +5,8 @@ using UnityEngine;
 public class ChestController : MonoBehaviour
 {
     public Animator animator;
-    public List<GameObject> itemsToSpawn;
-    public Transform spawnPoint; // Set this in the Inspector to determine where items will spawn
-
-    void Start()
-    {
-        if (animator == null)
-        {
-            Debug.LogError("ChestController: Animator is not assigned!");
-        }
-    }
+    public List<SpawnableItem> itemsToSpawn;
+    public Transform spawnPoint;
 
     public void OpenChest()
     {
@@ -23,10 +15,8 @@ public class ChestController : MonoBehaviour
 
     IEnumerator DelayedOpenChest()
     {
-        // Wait for 0.5 seconds before opening the chest
         yield return new WaitForSeconds(0.5f);
 
-        // Assuming you have an Animator parameter named "OpenChest" for chest opening animation
         if (animator != null)
         {
             animator.SetBool("OpenChest", true);
@@ -40,12 +30,26 @@ public class ChestController : MonoBehaviour
     {
         if (itemsToSpawn.Count > 0)
         {
-            int randomIndex = Random.Range(0, itemsToSpawn.Count);
-            GameObject itemPrefab = itemsToSpawn[randomIndex];
+            float totalSpawnChances = 0f;
 
-            // Spawn the item at the specified spawn point or chest's position if spawnPoint is not set
-            Vector3 spawnPosition = (spawnPoint != null) ? spawnPoint.position : transform.position;
-            Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
+            foreach (var item in itemsToSpawn)
+            {
+                totalSpawnChances += item.spawnChance;
+            }
+
+            float randomValue = Random.Range(0f, totalSpawnChances);
+
+            foreach (var item in itemsToSpawn)
+            {
+                if (randomValue <= item.spawnChance)
+                {
+                    Vector3 spawnPosition = (spawnPoint != null) ? spawnPoint.position : transform.position;
+                    Instantiate(item.itemPrefab, spawnPosition, Quaternion.identity);
+                    break;
+                }
+
+                randomValue -= item.spawnChance;
+            }
         }
     }
 }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6682653618931154285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5683964706366970724}
+  m_Layer: 6
+  m_Name: ItemSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5683964706366970724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682653618931154285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8449309764113872441}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8449309762948776251
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +108,7 @@ Transform:
   - {fileID: 8449309762948776250}
   - {fileID: 8449309764870052643}
   - {fileID: 8449309764372959360}
+  - {fileID: 5683964706366970724}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -204,6 +236,12 @@ MonoBehaviour:
   speed: 0
   maxHealth: 150
   currentHealth: 150
+  spawnPoint: {fileID: 5683964706366970724}
+  healthDrops:
+  - itemPrefab: {fileID: 5242009203777966477, guid: 9bd18255eb1fcdc49aff9aec83b61a23, type: 3}
+    spawnChance: 0.05
+  - itemPrefab: {fileID: 1135482665054196388, guid: 860f18fd3fd7be149b83afb486382ea0, type: 3}
+    spawnChance: 0.1
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}
   scoreText: {fileID: 0}

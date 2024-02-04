@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +8,11 @@ public class EnemyAI : MonoBehaviour
     public float speed = 3f;
     public int maxHealth = 100;
     public int currentHealth;
+
+    public Transform spawnPoint;
+
+    // List of spawnable items for health drops
+    public List<SpawnableItem> healthDrops;
 
     private Transform player;
     private Animator anim;
@@ -38,6 +44,7 @@ public class EnemyAI : MonoBehaviour
 
         StartCoroutine(DelayVulnerability());
     }
+
 
     private void Update()
     {
@@ -74,7 +81,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void Die()
+    void Die()
     {
         isDead = true;
 
@@ -164,6 +171,9 @@ public class EnemyAI : MonoBehaviour
         {
             myScriptComponentSeven.enabled = false;
         }
+
+        // Spawn a health drop
+        SpawnHealthDrop();
     }
 
     void StartAudioAgain()
@@ -216,5 +226,40 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         canTakeDamage = true;
+    }
+
+    // Method to spawn a health drop
+    void SpawnHealthDrop()
+    {
+        if (healthDrops.Count > 0)
+        {
+            float totalSpawnChances = 0f;
+
+            foreach (var item in healthDrops)
+            {
+                totalSpawnChances += item.spawnChance;
+            }
+
+            float randomValue = Random.Range(0f, 1f); // Generate a new random value between 0 and 1
+
+            if (randomValue > totalSpawnChances)
+            {
+                // Nothing spawns if the random value is greater than the total spawn chances
+                return;
+            }
+
+            foreach (var item in healthDrops)
+            {
+                if (randomValue <= item.spawnChance)
+                {
+                    // Spawn the item
+                    Vector3 spawnPosition = (spawnPoint != null) ? spawnPoint.position : transform.position;
+                    Instantiate(item.itemPrefab, spawnPosition, Quaternion.identity);
+                    return; // Exit the method after spawning an item
+                }
+
+                randomValue -= item.spawnChance;
+            }
+        }
     }
 }

@@ -48,6 +48,7 @@ Transform:
   - {fileID: 748456786230220574}
   - {fileID: 748456786981634248}
   - {fileID: 748456785374414902}
+  - {fileID: 2299507176247125987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -175,6 +176,12 @@ MonoBehaviour:
   speed: 0
   maxHealth: 150
   currentHealth: 150
+  spawnPoint: {fileID: 2299507176247125987}
+  healthDrops:
+  - itemPrefab: {fileID: 5242009203777966477, guid: 9bd18255eb1fcdc49aff9aec83b61a23, type: 3}
+    spawnChance: 0.05
+  - itemPrefab: {fileID: 1135482665054196388, guid: 860f18fd3fd7be149b83afb486382ea0, type: 3}
+    spawnChance: 0.1
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}
   scoreText: {fileID: 0}
@@ -880,3 +887,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &5995396468932299385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2299507176247125987}
+  m_Layer: 6
+  m_Name: ItemSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2299507176247125987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995396468932299385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748456785304379338}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
