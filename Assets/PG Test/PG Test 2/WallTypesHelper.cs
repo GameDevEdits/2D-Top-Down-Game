@@ -158,7 +158,8 @@ public static class WallTypesHelper
         0b01010110,
         0b11010101,
         0b11010100,
-        0b10010101
+        0b10010101,
+		0b11111111
 
     };
 
