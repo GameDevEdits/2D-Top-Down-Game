@@ -79,11 +79,24 @@ public class BulletController : MonoBehaviour
 
                 CheckForCriticalHit();
 
+                // Check if the enemy has the "Block" parameter set to true in its animator.
+                Animator enemyAnimator = enemy.GetComponent<Animator>();
+                bool enemyIsBlocking = enemyAnimator.GetBool("Block");
+
+                // Play the appropriate hit animation based on whether the enemy is blocking.
+                if (enemyIsBlocking)
+                {
+                    // Set the "rippleHit" parameter to true for the explode animation.
+                    bulletAnimator.SetBool("rippleHit", true);
+                }
+                else
+                {
+                    // Set the "normalHit" parameter to true for the explode animation.
+                    bulletAnimator.SetBool("normalHit", true);
+                }
+
                 // Apply damage to the enemy.
                 enemy.TakeDamage(damage);
-
-                // Set the "normalHit" parameter to true for the explode animation.
-                bulletAnimator.SetBool("normalHit", true);
 
                 // Set the flag to true to indicate that the bullet has hit an enemy.
                 hasHitEnemy = true;
@@ -94,6 +107,12 @@ public class BulletController : MonoBehaviour
         }
         // Check if the bullet has hit anything other than the player.
         else if (!other.CompareTag("Player"))
+        {
+            // Check if the bullet has hit anything other than an enemy (e.g., "Tree").
+            // If it has, ignore the collision and return early.
+            return;
+        }
+        else
         {
             // Stop the bullet movement immediately.
             isMoving = false;

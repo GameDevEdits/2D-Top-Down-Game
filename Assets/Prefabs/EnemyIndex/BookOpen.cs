@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BookOpen : MonoBehaviour
 {
+    public Collider2D bookCollider;
     public List<GameObject> objectsToEnable;
     public List<GameObject> objectsToDisable;
     public float fadeInDuration = 1f;
@@ -27,8 +28,8 @@ public class BookOpen : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            // Check if the ray hits a collider
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            // Check if the ray hits the specified collider
+            if (hit.collider != null && hit.collider == bookCollider)
             {
                 // Toggle the book state
                 isOpen = !isOpen;
@@ -40,7 +41,7 @@ public class BookOpen : MonoBehaviour
                 }
 
                 // Enable or disable objects based on the book state with a delay
-                StartCoroutine(isOpen ? EnableObjectsWithDelay() : DisableObjectsWithDelay());
+                StartCoroutine(isOpen ? EnableObjectsWithDelay() : DisableObjectsInstant());
             }
         }
     }
@@ -52,26 +53,20 @@ public class BookOpen : MonoBehaviour
         StartCoroutine(FadeInObjects());
     }
 
-    // Coroutine to disable specified game objects after a delay
-    private IEnumerator DisableObjectsWithDelay()
+    // Method to disable specified game objects without delay
+    private IEnumerator DisableObjectsInstant()
     {
-        yield return new WaitForSeconds(delayDuration);
-        DisableObjects();
+        foreach (GameObject obj in objectsToDisable)
+        {
+            obj.SetActive(false);
+        }
+        yield return null;
     }
 
     // Method to enable specified game objects with fade-in effect
     private void EnableObjects()
     {
         StartCoroutine(FadeInObjects());
-    }
-
-    // Method to disable specified game objects
-    private void DisableObjects()
-    {
-        foreach (GameObject obj in objectsToEnable)
-        {
-            obj.SetActive(false);
-        }
     }
 
     // Coroutine for fade-in effect
@@ -100,12 +95,5 @@ public class BookOpen : MonoBehaviour
 
         // Remove the CanvasGroup component when the fade is complete
         Destroy(group);
-
-        // Disable specified game objects after a delay
-        yield return new WaitForSeconds(delayDuration);
-        foreach (GameObject obj in objectsToDisable)
-        {
-            obj.SetActive(false);
-        }
     }
 }
