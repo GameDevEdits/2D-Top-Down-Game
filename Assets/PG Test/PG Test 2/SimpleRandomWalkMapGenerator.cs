@@ -8,6 +8,12 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
 {
 	
 	[SerializeField]protected SimpleRandomWalkSO randomWalkParameters;
+	[SerializeField]protected AbstractDungeonGenerator generator;
+	
+	public void Awake()
+	{
+		generator.GenerateDungeon();
+	}
 	
 	protected override void RunProceduralGeneration()
 	{
