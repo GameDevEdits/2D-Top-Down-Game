@@ -8,6 +8,7 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
 {
 	[SerializeField]private int corridorLength = 14, corridorCount = 5;
 	[SerializeField][Range(0.1f,1)]private float roomPercent = 0.8f;
+	[SerializeField]private bool randomWalkRooms = false;
 	
     protected override void RunProceduralGeneration()
 	{
