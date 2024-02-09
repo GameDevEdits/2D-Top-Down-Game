@@ -9,10 +9,6 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 	[SerializeField]private int roomLimit;
 	[SerializeField][Range(0,10)]private int offset = 1;
 	
-	private Dictionary<Vector2Int, HashSet<Vector2Int>> roomsDictionary = new Dictionary<Vector2Int, HashSet<Vector2Int>>();
-	
-	private HashSet<Vector2Int> floorPositions, corridorPositions;
-	
 	void Awake()
 	{
 		roomLimit = Random.Range(5, 9);

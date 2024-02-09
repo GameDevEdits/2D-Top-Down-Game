@@ -29,8 +29,8 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
 		CreateRoomsAtDeadEnd(deadEnds, roomPositions);
 		
 		floorPositions.UnionWith(roomPositions);
-		
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
+		
 		WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
 	}
 	
@@ -77,6 +77,7 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
 		foreach (var roomPosition in roomsToCreate)
 		{
 			var roomFloor = RunRandomWalk(randomWalkParameters, roomPosition);
+			
 			roomPositions.UnionWith(roomFloor);
 		}
 		return roomPositions;
