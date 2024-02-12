@@ -8,7 +8,7 @@ public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField]private Tilemap floorTilemap, wallTilemap;
 	
-	[SerializeField]private TileBase floorTile, wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull, wallInnerCornerDownLeft, wallInnerCornerDownRight, wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft, wallInnerCornerUpLeft, wallInnerCornerUpRight;
+	[SerializeField]private TileBase floorTile, CorridorTile, wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull, wallInnerCornerDownLeft, wallInnerCornerDownRight, wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft, wallInnerCornerUpLeft, wallInnerCornerUpRight;
 	
 	public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
 	{
