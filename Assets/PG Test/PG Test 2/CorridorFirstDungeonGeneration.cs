@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
 {
 	[SerializeField]private int corridorLength = 14, corridorCount = 5;
 	[SerializeField][Range(0.1f,1)]private float roomPercent = 0.8f;
+	[SerializeField]private bool randomWalkRooms = false;
 	
     protected override void RunProceduralGeneration()
 	{
@@ -27,8 +29,8 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
 		CreateRoomsAtDeadEnd(deadEnds, roomPositions);
 		
 		floorPositions.UnionWith(roomPositions);
-		
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
+		
 		WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
 	}
 	
@@ -70,11 +72,12 @@ public class CorridorFirstDungeonGeneration : SimpleRandomWalkMapGenerator
 		HashSet<Vector2Int> roomPositions = new HashSet<Vector2Int>();
 		int roomToCreateCount = Mathf.RoundToInt(potentialRoomPositions.Count*roomPercent);
 		
-		List<Vector2Int> roomsToCreate = potentialRoomPositions.OrderBy(x => Random.Range(-10000,10000)).Take(roomToCreateCount).ToList();
+		List<Vector2Int> roomsToCreate = potentialRoomPositions.OrderBy(x => Guid.NewGuid()).Take(roomToCreateCount).ToList();
 		
 		foreach (var roomPosition in roomsToCreate)
 		{
 			var roomFloor = RunRandomWalk(randomWalkParameters, roomPosition);
+			
 			roomPositions.UnionWith(roomFloor);
 		}
 		return roomPositions;

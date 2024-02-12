@@ -6,12 +6,14 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 {
     [SerializeField]private int minRoomWidth = 4, minRoomHeight = 4;
 	[SerializeField]private int dungeonWidth = 20, dungeonHeight = 20;
+	[SerializeField]private int roomLimit;
 	[SerializeField][Range(0,10)]private int offset = 1;
-	[SerializeField]private bool randomWalkRooms = false;
 	
-	private Dictionary<Vector2Int, HashSet<Vector2Int>> roomsDictionary = new Dictionary<Vector2Int, HashSet<Vector2Int>>();
-	
-	private HashSet<Vector2Int> floorPositions, corridorPositions;
+	void Awake()
+	{
+		roomLimit = Random.Range(5, 9);
+		generator.GenerateDungeon();
+	}
 	
 	protected override void RunProceduralGeneration()
 	{
