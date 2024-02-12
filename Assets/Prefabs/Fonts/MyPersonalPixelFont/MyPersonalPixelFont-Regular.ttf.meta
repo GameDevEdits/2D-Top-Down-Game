@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b3ae9c4d40b65ce43a0e8029e39c37fb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - My Personal Pixel Font
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2168de60de684c24f8f6490a2dd9ba53, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

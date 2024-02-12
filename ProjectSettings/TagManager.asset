@@ -16,6 +16,7 @@ TagManager:
   - Chest
   - Orange
   - Slice
+  - Bush
   layers:
   - Default
   - TransparentFX

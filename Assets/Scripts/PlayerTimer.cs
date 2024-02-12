@@ -40,6 +40,6 @@ public class PlayerTimer : MonoBehaviour
     // Method to update the kill count display.
     private void UpdateKillCountText()
     {
-        killCountText.text = $"Kills: {killCount}";
+        killCountText.text = $"{killCount}";
     }
 }

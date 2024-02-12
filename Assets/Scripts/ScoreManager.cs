@@ -40,7 +40,7 @@ public class ScoreManager : MonoBehaviour
     public void Update()
     {
         scoreText.text = $"Score: {scoreScriptableObject.Score.ToString()}";
-        killText.text = $"Kills: {scoreScriptableObject.Kills.ToString()}";
+        killText.text = $"{scoreScriptableObject.Kills.ToString()}";
     }
 
     // Method to update the score display.
