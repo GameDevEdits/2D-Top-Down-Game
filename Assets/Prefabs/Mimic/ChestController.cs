@@ -5,12 +5,18 @@ using UnityEngine;
 public class ChestController : MonoBehaviour
 {
     public Animator animator;
-    public List<SpawnableItem> itemsToSpawn;
+    public List<CustomSpawnableItem> itemsToSpawn;
     public Transform spawnPoint;
+
+    private bool isOpened = false;
 
     public void OpenChest()
     {
-        StartCoroutine(DelayedOpenChest());
+        if (!isOpened)
+        {
+            StartCoroutine(DelayedOpenChest());
+            isOpened = true;
+        }
     }
 
     IEnumerator DelayedOpenChest()
@@ -52,4 +58,11 @@ public class ChestController : MonoBehaviour
             }
         }
     }
+}
+
+[System.Serializable]
+public class CustomSpawnableItem
+{
+    public GameObject itemPrefab;
+    public float spawnChance;
 }

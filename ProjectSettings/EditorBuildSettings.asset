@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScreen.unity
     guid: 8ac507a4cf9c6e145822c50e4c83e681
+  - enabled: 1
+    path: Assets/Scenes/EnemyIndex.unity
+    guid: 964fb7ace2d88eb4e8353e782beab65b
   m_configObjects: {}

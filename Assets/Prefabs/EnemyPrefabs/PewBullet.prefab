@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3461451435107431916}
   - component: {fileID: 3461451435107431919}
   - component: {fileID: 3461451435107431904}
+  - component: {fileID: 8630145719596580659}
   - component: {fileID: 3461451435107431915}
-  - component: {fileID: -3281844363914927804}
   m_Layer: 8
   m_Name: PewBullet
   m_TagString: EnemyBullet
@@ -170,6 +170,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 50
+--- !u!114 &8630145719596580659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3461451435107431909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ee30928e86144489891b9f2fa47a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3461451435107431908}
 --- !u!114 &3461451435107431915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,17 +193,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d211999fee528a742b68f967d83c0b0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-3281844363914927804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3461451435107431909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5753ce1e1fb9a4cadb79ef20f52d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
