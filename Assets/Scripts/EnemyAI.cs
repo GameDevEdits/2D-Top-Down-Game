@@ -174,6 +174,8 @@ public class EnemyAI : MonoBehaviour
 
         // Spawn a health drop
         SpawnHealthDrop();
+		SpawnerEnablerScript.enemiesNeeded--;
+		Debug.Log("Enemies Remaining: "+SpawnerEnablerScript.enemiesNeeded);
     }
 
     void StartAudioAgain()

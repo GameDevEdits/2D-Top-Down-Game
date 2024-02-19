@@ -13,68 +13,84 @@ public class SpawnerEnablerScript : MonoBehaviour
     public GameObject wave2Icon;
     public GameObject wave2Text;
     public GameObject wavesCompletedIcon;
+	public static int enemiesNeeded;
+	public static int wave = 0;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && wave == 0)
         {
-            StartCoroutine(ActivateAndDeactivate());
+			wave++;
+            StartCoroutine(Wave1());
         }
     }
+	
+	private void Update()
+	{
+		if(enemiesNeeded == 0 && wave == 1)
+		{
+			StartCoroutine(Wave2());
+			wave++;
+		}
+		
+		if(enemiesNeeded == 0 && wave == 2)
+		{
+			StartCoroutine(nextRoom());
+			wave = 0;
+		}
+	}
 
-    private IEnumerator ActivateAndDeactivate()
+    private IEnumerator Wave1()
     {
         // Disable collider
         GetComponent<Collider2D>().enabled = false;
 
-        if (wave1SpawnerObject != null && wave2SpawnerObject != null)
+        if (wave1SpawnerObject != null)
         {
             EnemySpawner wave1Spawner = wave1SpawnerObject.GetComponent<EnemySpawner>();
-            EnemySpawner wave2Spawner = wave2SpawnerObject.GetComponent<EnemySpawner>();
+			enemiesNeeded = EnemySpawner.numberOfEnemiesToSpawn;
 
-            // Step 1: Enable Wave1Icon
             wave1Icon.SetActive(true);
             wave1Text.SetActive(true);
 
             yield return new WaitForSeconds(3f);
 
-            // Step 2: Disable Wave1Icon
+            Debug.Log("wave "+wave);
 
-            Debug.Log("20-second wave 1");
-
-            // Step 3: Start Wave 1
             wave1Spawner.SpawnEnemies();
             wave1SpawnerObject.SetActive(true);
-            float wave1Timer = 15f;
-            while (wave1Timer > 0f)
-            {
-                wave1Timer -= Time.deltaTime;
-                yield return null;
-            }
+			Debug.Log("Kill "+enemiesNeeded+" enemies");
+		}
+	}
+	
+	private IEnumerator Wave2()
+	{
+		wave2Icon.SetActive(true);
+		wave1Text.SetActive(false);
+		EnemySpawner wave2Spawner = wave2SpawnerObject.GetComponent<EnemySpawner>();
+		enemiesNeeded = EnemySpawner.numberOfEnemiesToSpawn;
+			
+		yield return new WaitForSeconds(0.1f);
+			
+			
+        wave2Text.SetActive(true);
+        Debug.Log("wave "+wave);
+        wave2Spawner.SpawnEnemies();
+        wave2SpawnerObject.SetActive(true);
+            
 
-            // Step 5: Start Wave 2
-            wave2Icon.SetActive(true);
-            wave1Text.SetActive(false);
-            wave2Text.SetActive(true);
-            Debug.Log("20-second wave 2");
-            wave2Spawner.SpawnEnemies();
-            wave2SpawnerObject.SetActive(true);
-            float wave2Timer = 20f;
-            while (wave2Timer > 0f)
-            {
-                wave2Timer -= Time.deltaTime;
-                yield return null;
-            }
+        wave1Icon.SetActive(false);
+	}
+	
+	private IEnumerator nextRoom()
+	{
+		wave2Icon.SetActive(false);
+        wave2Text.SetActive(false);
+		wavesCompletedIcon.SetActive(true);
+        archwayBlocker.SetActive(false);
+		wave = 0;
 
-            wave1Icon.SetActive(false);
-            wave2Icon.SetActive(false);
-            wave2Text.SetActive(false);
 
-            // Step 6: Enable WavesCompletedIcon and open archway
-            wavesCompletedIcon.SetActive(true);
-            archwayBlocker.SetActive(false);
-
-            // Set waves completed for the specific archway
             if (specificArchway != null)
             {
                 AffectedArchwayController affectedArchwayController = specificArchway.GetComponent<AffectedArchwayController>();
@@ -87,6 +103,5 @@ public class SpawnerEnablerScript : MonoBehaviour
 
             yield return new WaitForSeconds(5f);
             wavesCompletedIcon.SetActive(false);
-        }
-    }
+	}
 }
