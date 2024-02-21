@@ -18,10 +18,10 @@ public class SpawnerEnablerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && wave == 0)
+        if (other.CompareTag("Player"))
         {
-			wave++;
-            StartCoroutine(Wave1());
+            wave = 0;
+			StartCoroutine(Wave1());
         }
     }
 	
@@ -35,23 +35,26 @@ public class SpawnerEnablerScript : MonoBehaviour
 		
 		if(enemiesNeeded == 0 && wave == 2)
 		{
-			StartCoroutine(nextRoom());
-			wave = 0;
+			nextRoom();
 		}
 	}
 
     private IEnumerator Wave1()
     {
         // Disable collider
+		wave++;
         GetComponent<Collider2D>().enabled = false;
 
         if (wave1SpawnerObject != null)
         {
             EnemySpawner wave1Spawner = wave1SpawnerObject.GetComponent<EnemySpawner>();
 			enemiesNeeded = EnemySpawner.numberOfEnemiesToSpawn;
+			
+			wavesCompletedIcon.SetActive(false);
 
             wave1Icon.SetActive(true);
             wave1Text.SetActive(true);
+			archwayBlocker.SetActive(true);
 
             yield return new WaitForSeconds(3f);
 
@@ -65,6 +68,7 @@ public class SpawnerEnablerScript : MonoBehaviour
 	
 	private IEnumerator Wave2()
 	{
+		wave1Icon.SetActive(false);
 		wave2Icon.SetActive(true);
 		wave1Text.SetActive(false);
 		EnemySpawner wave2Spawner = wave2SpawnerObject.GetComponent<EnemySpawner>();
@@ -82,13 +86,12 @@ public class SpawnerEnablerScript : MonoBehaviour
         wave1Icon.SetActive(false);
 	}
 	
-	private IEnumerator nextRoom()
+	private void nextRoom()
 	{
+		archwayBlocker.SetActive(false);
 		wave2Icon.SetActive(false);
         wave2Text.SetActive(false);
 		wavesCompletedIcon.SetActive(true);
-        archwayBlocker.SetActive(false);
-		wave = 0;
 
 
             if (specificArchway != null)
@@ -100,8 +103,5 @@ public class SpawnerEnablerScript : MonoBehaviour
                     affectedArchwayController.OpenArchway();
                 }
             }
-
-            yield return new WaitForSeconds(5f);
-            wavesCompletedIcon.SetActive(false);
 	}
 }
