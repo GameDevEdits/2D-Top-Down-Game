@@ -74,7 +74,7 @@ public class SpawnerEnablerScript : MonoBehaviour
 		EnemySpawner wave2Spawner = wave2SpawnerObject.GetComponent<EnemySpawner>();
 		enemiesNeeded = EnemySpawner.numberOfEnemiesToSpawn;
 			
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(1f);
 			
 			
         wave2Text.SetActive(true);
