@@ -8,6 +8,7 @@ public class PommeTurn : MonoBehaviour
 	private bool isTurning;
 	private Rigidbody2D rb;
 	private bool isFrozen;
+	private Transform playerTransform;
 	
 	[SerializeField]private FlipEnemyAI flipEnemyAi;
 	
@@ -15,10 +16,75 @@ public class PommeTurn : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
+		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    public void FixedUpdate()
     {
-        
+		if(!isTurning)
+		{
+			if((playerTransform.transform.position.x > transform.position.x && !flipEnemyAi.faceRight) || (playerTransform.transform.position.x < transform.position.x && !flipEnemyAi.faceLeft))
+			{
+				isTurning = true;
+				
+				if(animator != null)
+				{
+					animator.SetBool("Turn", true);
+				}
+				
+				StartCoroutine(ResetTurn());
+			}
+		}
     }
+	
+	private IEnumerator ResetTurn()
+	{
+		yield return new WaitForSeconds(1f);
+		
+		if(animator != null)
+		{
+			animator.SetBool("Turn", false);
+		}
+		
+		isTurning = false;
+		
+		if(isFrozen && rb != null)
+		{
+			rb.gameObject.SendMessage("Move", SendMessageOptions.DontRequireReceiver);
+            isFrozen = false;
+		}
+	}
+	
+	public bool IsTurning()
+	{
+		return isTurning;
+	}
+	
+	public void Freeze()
+	{
+		if(flipEnemyAi != null)
+		{
+			flipEnemyAi.enabled = false;
+		}
+		
+		if(!isFrozen && rb != null)
+		{
+			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            isFrozen = true;
+		}
+	}
+	
+	public void Move()
+	{
+		if(flipEnemyAi != null)
+		{
+			flipEnemyAi.enabled = true;
+		}
+		
+		if (isFrozen && rb != null)
+        {
+            rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
+            isFrozen = false;
+        }
+	}
 }

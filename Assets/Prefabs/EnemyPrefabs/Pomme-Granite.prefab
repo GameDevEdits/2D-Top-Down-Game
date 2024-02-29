@@ -321,6 +321,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flip: 1
+  faceRight: 0
+  faceLeft: 0
+  pommeTurn: {fileID: 6342234598545639009}
 --- !u!114 &5004118565936025063
 MonoBehaviour:
   m_ObjectHideFlags: 0
