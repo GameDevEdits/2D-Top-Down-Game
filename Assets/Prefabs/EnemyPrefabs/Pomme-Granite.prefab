@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5004118565936025070}
   - component: {fileID: 5004118565936025069}
   - component: {fileID: 313721475091938288}
+  - component: {fileID: 6342234598545639009}
   - component: {fileID: 5004118565936025071}
   - component: {fileID: 5004118565936025064}
   - component: {fileID: 5004118565936025073}
@@ -254,6 +255,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRadius: 8
+--- !u!114 &6342234598545639009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004118565936025075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcfa96e5bf8da24b80ba48761c02638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipEnemyAi: {fileID: 5004118565936025073}
 --- !u!114 &5004118565936025071
 MonoBehaviour:
   m_ObjectHideFlags: 0
