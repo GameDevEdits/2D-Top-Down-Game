@@ -8,7 +8,6 @@ public class PommeTurn : MonoBehaviour
 	private bool isTurning;
 	private Rigidbody2D rb;
 	private bool isFrozen;
-	private Transform playerTransform;
 	
 	[SerializeField]private FlipEnemyAI flipEnemyAi;
 	
@@ -16,24 +15,20 @@ public class PommeTurn : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    public void FixedUpdate()
+    public void TriggerTurn(Transform playerTransform)
     {
 		if(!isTurning)
 		{
-			if((playerTransform.transform.position.x > transform.position.x && !flipEnemyAi.faceRight) || (playerTransform.transform.position.x < transform.position.x && !flipEnemyAi.faceLeft))
-			{
 				isTurning = true;
 				
 				if(animator != null)
 				{
-					animator.SetBool("Turn", true);
+					animator.SetBool("IsTurn", true);
 				}
 				
 				StartCoroutine(ResetTurn());
-			}
 		}
     }
 	
@@ -43,7 +38,7 @@ public class PommeTurn : MonoBehaviour
 		
 		if(animator != null)
 		{
-			animator.SetBool("Turn", false);
+			animator.SetBool("IsTurn", false);
 		}
 		
 		isTurning = false;
