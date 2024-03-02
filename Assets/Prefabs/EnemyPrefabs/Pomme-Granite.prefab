@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bcfa96e5bf8da24b80ba48761c02638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipEnemyAi: {fileID: 5004118565936025073}
+  enemyAi: {fileID: 5004118565936025069}
 --- !u!114 &5004118565936025071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flip: 1
+  faceRight: 0
+  pommeTurn: {fileID: 6342234598545639009}
 --- !u!114 &5004118565936025063
 MonoBehaviour:
   m_ObjectHideFlags: 0

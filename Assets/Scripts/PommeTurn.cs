@@ -17,8 +17,69 @@ public class PommeTurn : MonoBehaviour
 		animator = GetComponent<Animator>();
     }
 
-    void Update()
+    public void TriggerTurn(Transform playerTransform)
     {
-        
+		if(!isTurning)
+		{
+				isTurning = true;
+				
+				if(animator != null)
+				{
+					animator.SetBool("IsTurn", true);
+				}
+				
+				StartCoroutine(ResetTurn());
+		}
     }
+	
+	private IEnumerator ResetTurn()
+	{
+		yield return new WaitForSeconds(1f);
+		
+		if(animator != null)
+		{
+			animator.SetBool("IsTurn", false);
+		}
+		
+		isTurning = false;
+		
+		if(isFrozen && rb != null)
+		{
+			rb.gameObject.SendMessage("Move", SendMessageOptions.DontRequireReceiver);
+            isFrozen = false;
+		}
+	}
+	
+	public bool IsTurning()
+	{
+		return isTurning;
+	}
+	
+	public void Freeze()
+	{
+		if(flipEnemyAi != null)
+		{
+			flipEnemyAi.enabled = false;
+		}
+		
+		if(!isFrozen && rb != null)
+		{
+			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            isFrozen = true;
+		}
+	}
+	
+	public void Move()
+	{
+		if(flipEnemyAi != null)
+		{
+			flipEnemyAi.enabled = true;
+		}
+		
+		if (isFrozen && rb != null)
+        {
+            rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
+            isFrozen = false;
+        }
+	}
 }
