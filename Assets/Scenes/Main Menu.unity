@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ENEMY INDEX
+  m_text: GROCIERARY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29b84750c7614084db7d9f544e638b8f, type: 2}
   m_sharedMaterial: {fileID: 6857191877097818382, guid: 29b84750c7614084db7d9f544e638b8f, type: 2}
@@ -3444,7 +3444,7 @@ GameObject:
   - component: {fileID: 2022333567}
   - component: {fileID: 2022333566}
   m_Layer: 5
-  m_Name: EnemyIndexButton
+  m_Name: GrocieraryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

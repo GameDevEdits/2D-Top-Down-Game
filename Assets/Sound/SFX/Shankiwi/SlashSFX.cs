@@ -5,6 +5,7 @@ using UnityEngine;
 public class SlashSFX : MonoBehaviour
 {
     public AudioSource audioSource;
+    public NewEnemyMADShank enemyScript;
 
     void Start()
     {
@@ -12,11 +13,25 @@ public class SlashSFX : MonoBehaviour
         {
             Debug.LogError("AudioSource not assigned!");
         }
+
+        // Find the enemy script if not assigned
+        if (enemyScript == null)
+        {
+            enemyScript = GetComponentInParent<NewEnemyMADShank>();
+            if (enemyScript == null)
+            {
+                Debug.LogError("NewEnemyMADShank script not found!");
+            }
+        }
     }
 
     public void SlashAnimEvent()
     {
-        PlayAudio();
+        // Check if the player is within the damage radius before playing audio
+        if (enemyScript != null && enemyScript.IsPlayerWithinDamageRadius())
+        {
+            PlayAudio();
+        }
     }
 
     void PlayAudio()

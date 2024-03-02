@@ -358,9 +358,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 19277014281560344, guid: 1dc17daf22e085344a5c0ba0d8e6aacc, type: 3}
+  slashPrefab: {fileID: 2607856714829579350, guid: 702d2ffaff274be46a165fe0381dea1b, type: 3}
   bulletSpeed: 20
   bulletDamage: 25
   damageRadius: 3
+  slashOffset: 0
 --- !u!114 &4712277252364624487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 7366320873345403603}
+  enemyScript: {fileID: 4712277252364624495}
 --- !u!114 &6819616851577302991
 MonoBehaviour:
   m_ObjectHideFlags: 0
