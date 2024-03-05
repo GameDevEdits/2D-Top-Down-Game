@@ -4,35 +4,84 @@ using UnityEngine;
 
 public class PommeTurn : MonoBehaviour
 {
-    private Animator animator;
+	public bool flip;
+	private Animator animator;
 	private bool isTurning;
 	private Rigidbody2D rb;
 	private bool isFrozen;
+	private Transform playerTransform;
+	private bool faceRight;
+	private bool faceLeft;
 	
-	[SerializeField]private FlipEnemyAI flipEnemyAi;
+	[SerializeField]private EnemyAI enemyAi;
 	
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
+		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+		
+		if(playerTransform.transform.position.x > transform.position.x)
+		{
+			Vector3 scale = transform.localScale;
+			faceRight = true;
+			faceLeft = false;
+			scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
+			transform.localScale = scale;
+		}
+		else
+		{
+			Vector3 scale = transform.localScale;
+			faceRight = false;
+			faceLeft = true;
+			scale.x = Mathf.Abs(scale.x) * -1 * (flip ? -1 : 1);
+			transform.localScale = scale;
+		}
     }
 
-    public void TriggerTurn(Transform playerTransform)
+    public void Update()
     {
 		if(!isTurning)
 		{
+			if(playerTransform.transform.position.x > transform.position.x && !faceRight && faceLeft)
+			{
 				isTurning = true;
+				animator.SetBool("IsTurn", true);
 				
-				if(animator != null)
-				{
-					animator.SetBool("IsTurn", true);
-				}
+				StartCoroutine(ResetTurnRight());
+			}
+		
+			else if(playerTransform.transform.position.x < transform.position.x && !faceLeft && faceRight)
+			{
+				isTurning = true;
+				animator.SetBool("IsTurn", true);
 				
-				StartCoroutine(ResetTurn());
+				StartCoroutine(ResetTurnLeft());
+			}
 		}
     }
 	
-	private IEnumerator ResetTurn()
+	private IEnumerator ResetTurnRight()
+	{
+		yield return new WaitForSeconds(1f);
+		
+		if(animator != null)
+		{
+			animator.SetBool("IsTurn", false);
+		}
+		
+		isTurning = false;
+
+		Vector3 scale = transform.localScale;
+		faceRight = true;
+		faceLeft = false;
+		scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
+		transform.localScale = scale;
+		
+		Move();
+	}
+	
+	private IEnumerator ResetTurnLeft()
 	{
 		yield return new WaitForSeconds(1f);
 		
@@ -43,11 +92,13 @@ public class PommeTurn : MonoBehaviour
 		
 		isTurning = false;
 		
-		if(isFrozen && rb != null)
-		{
-			rb.gameObject.SendMessage("Move", SendMessageOptions.DontRequireReceiver);
-            isFrozen = false;
-		}
+		Vector3 scale = transform.localScale;
+		faceRight = true;
+		faceLeft = false;
+		scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
+		transform.localScale = scale;
+		
+		Move();
 	}
 	
 	public bool IsTurning()
@@ -57,11 +108,11 @@ public class PommeTurn : MonoBehaviour
 	
 	public void Freeze()
 	{
-		if(flipEnemyAi != null)
+		EnemyAI enemyAi = GetComponent<EnemyAI>();
+		if(enemyAi != null)
 		{
-			flipEnemyAi.enabled = false;
+			enemyAi.enabled = false;
 		}
-		
 		if(!isFrozen && rb != null)
 		{
 			rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -71,11 +122,11 @@ public class PommeTurn : MonoBehaviour
 	
 	public void Move()
 	{
-		if(flipEnemyAi != null)
+		EnemyAI enemyAi = GetComponent<EnemyAI>();
+		if(enemyAi != null)
 		{
-			flipEnemyAi.enabled = true;
+			enemyAi.enabled = true;
 		}
-		
 		if (isFrozen && rb != null)
         {
             rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
