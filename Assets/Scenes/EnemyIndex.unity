@@ -5263,7 +5263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enemy Index
+  m_text: Grocierary
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29b84750c7614084db7d9f544e638b8f, type: 2}
   m_sharedMaterial: {fileID: 6857191877097818382, guid: 29b84750c7614084db7d9f544e638b8f, type: 2}
