@@ -44,18 +44,12 @@ public class PommeTurn : MonoBehaviour
 		if(!isTurning)
 		{
 			if(playerTransform.transform.position.x > transform.position.x && !faceRight && faceLeft)
-			{
-				isTurning = true;
-				animator.SetBool("IsTurn", true);
-				
+			{	
 				StartCoroutine(ResetTurnRight());
 			}
 		
 			else if(playerTransform.transform.position.x < transform.position.x && !faceLeft && faceRight)
-			{
-				isTurning = true;
-				animator.SetBool("IsTurn", true);
-				
+			{	
 				StartCoroutine(ResetTurnLeft());
 			}
 		}
@@ -63,7 +57,10 @@ public class PommeTurn : MonoBehaviour
 	
 	private IEnumerator ResetTurnRight()
 	{
-		yield return new WaitForSeconds(1f);
+		isTurning = true;
+		animator.SetBool("IsTurn", true);
+		
+		yield return new WaitForSeconds(0.5f);
 		
 		if(animator != null)
 		{
@@ -83,7 +80,10 @@ public class PommeTurn : MonoBehaviour
 	
 	private IEnumerator ResetTurnLeft()
 	{
-		yield return new WaitForSeconds(1f);
+		isTurning = true;
+		animator.SetBool("IsTurn", true);
+		
+		yield return new WaitForSeconds(0.5f);
 		
 		if(animator != null)
 		{
