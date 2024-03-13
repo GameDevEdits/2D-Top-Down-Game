@@ -283,4 +283,18 @@ public class PlayerHealth : MonoBehaviour
     {
         return isBlocking;
     }
+
+    // Inside the PlayerHealth class
+    public void RollHealthPause()
+    {
+        // Stop taking damage during rolling
+        canTakeDamage = false;
+    }
+
+    // Inside the PlayerHealth class
+    public void RollHealthResume()
+    {
+        // Resume taking damage after rolling animation finishes
+        canTakeDamage = true;
+    }
 }

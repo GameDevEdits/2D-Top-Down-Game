@@ -762,7 +762,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.5833333
-    functionName: FreezePosition
+    functionName: RollHealthPause
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: SlowM
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -789,8 +796,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1666666
-    functionName: UnfreezePosition
+  - time: 1.25
+    functionName: NormalM
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.25
+    functionName: RollHealthResume
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

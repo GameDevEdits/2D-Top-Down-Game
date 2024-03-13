@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PMovement2 : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 6f;
     public float dashMultiplier = 2f;
     public float dashDuration = 0.5f;
     public float dashCooldown = 2f;
@@ -41,11 +41,6 @@ public class PMovement2 : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        if (isIdle)
-        {
-            UpdateIdleDirection();
-        }
-
         // Check if the player is not blocking and the dash conditions are met
         if (!GetComponent<PlayerHealth>().IsBlocking() && Input.GetKeyDown(KeyCode.Space) && !isDashing && dashCooldownTimer <= 0f)
         {
@@ -80,13 +75,25 @@ public class PMovement2 : MonoBehaviour
         {
             dashCooldownTimer -= Time.deltaTime;
         }
+
+        // Set animator parameters for back idle
+        bool isWKeyUp = Input.GetKeyUp(KeyCode.W);
+        bool isAKeyUp = Input.GetKeyUp(KeyCode.A);
+        bool isDKeyUp = Input.GetKeyUp(KeyCode.D);
+        bool isSKeyUp = Input.GetKeyUp(KeyCode.S);
+
+        animator.SetBool("backIdleLeft", isWKeyUp && (isAKeyUp || Input.GetKeyUp(KeyCode.S)));
+        animator.SetBool("backIdleRight", isWKeyUp && isDKeyUp);
+        animator.SetBool("rightIdle", isSKeyUp);
+
+        // Check if the player is idle
+        isIdle = Mathf.Approximately(movement.sqrMagnitude, 0f);
     }
+
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        isIdle = Mathf.Approximately(movement.sqrMagnitude, 0f);
     }
 
     void StartDash()
@@ -105,22 +112,6 @@ public class PMovement2 : MonoBehaviour
         moveSpeed = originalMoveSpeed;
         isDashing = false;
         dashCooldownTimer = dashCooldown;
-    }
-
-    private void UpdateIdleDirection()
-    {
-        if (movement.x > 0)
-        {
-            animator.SetFloat("IdleDirectionX", 1f);
-        }
-        else if (movement.x < 0)
-        {
-            animator.SetFloat("IdleDirectionX", -1f);
-        }
-        else
-        {
-            animator.SetFloat("IdleDirectionX", 0f);
-        }
     }
 
     void PlayFootstepAudio()
@@ -214,4 +205,15 @@ public class PMovement2 : MonoBehaviour
         // Reset the chestOpening boolean after the animation is done
         animator.SetBool("chestOpening", false);
     }
+
+    public void SlowM()
+    {
+        moveSpeed = 3f;
+    }
+
+    public void NormalM()
+    {
+        moveSpeed = 6f;
+    }
+
 }
