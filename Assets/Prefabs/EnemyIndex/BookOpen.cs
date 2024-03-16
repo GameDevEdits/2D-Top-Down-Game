@@ -51,6 +51,9 @@ public class BookOpen : MonoBehaviour
     {
         yield return new WaitForSeconds(delayDuration);
         StartCoroutine(FadeInObjects());
+
+        // Allow page flipping when the book is opened
+        FindObjectOfType<FlipPage>().enabled = true;
     }
 
     // Method to disable specified game objects without delay
@@ -61,6 +64,9 @@ public class BookOpen : MonoBehaviour
             obj.SetActive(false);
         }
         yield return null;
+
+        // Disable page flipping when the book is closed
+        FindObjectOfType<FlipPage>().enabled = false;
     }
 
     // Method to enable specified game objects with fade-in effect

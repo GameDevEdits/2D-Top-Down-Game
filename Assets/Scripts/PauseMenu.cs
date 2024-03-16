@@ -49,6 +49,12 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+    public void GoToEnemyIndex()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("EnemyIndex");
+    }
+
     public void QuitGame()
     {
         Application.Quit();

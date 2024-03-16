@@ -10,13 +10,20 @@ public class FlipPage : MonoBehaviour
     public float fadeInDuration = 1f;
     public float delayDuration = 1f;
     public Animator animator;
+    public Animator otherAnimator; // New public variable for the other Animator
 
     private bool pageFlipped = false;
 
+    // Ensure the script is disabled by default
+    private void Start()
+    {
+        enabled = false;
+    }
+
     private void Update()
     {
-        // Check for left mouse click
-        if (Input.GetMouseButtonDown(0))
+        // Check if the book is open and page flipping is allowed
+        if (enabled && Input.GetMouseButtonDown(0))
         {
             // Cast a ray from the mouse position in 2D space
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -33,6 +40,9 @@ public class FlipPage : MonoBehaviour
                         obj.SetActive(false);
                     }
 
+                    // Start coroutine to delay setting "markDown" to true in the other animator
+                    StartCoroutine(DelayMarkDown());
+
                     PageFlip();
                 }
                 else
@@ -40,6 +50,17 @@ public class FlipPage : MonoBehaviour
                     ResetPage();
                 }
             }
+        }
+    }
+
+    private IEnumerator DelayMarkDown()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        // Set "markDown" to true in the other animator after the delay
+        if (otherAnimator != null)
+        {
+            otherAnimator.SetBool("markDown", true);
         }
     }
 

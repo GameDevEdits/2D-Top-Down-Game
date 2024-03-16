@@ -24,6 +24,11 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel("Room 1"));
     }
 
+    public void GoToEnemyIndex()
+    {
+        StartCoroutine(LoadLevel("EnemyIndex"));
+    }
+
     IEnumerator LoadLevel(int levelIndex)
     {
         //Play Anim
