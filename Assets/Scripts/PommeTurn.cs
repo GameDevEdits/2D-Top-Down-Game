@@ -44,12 +44,18 @@ public class PommeTurn : MonoBehaviour
 		if(!isTurning)
 		{
 			if(playerTransform.transform.position.x > transform.position.x && !faceRight && faceLeft)
-			{	
+			{
+				isTurning = true;
+				animator.SetBool("IsTurn", true);
+				
 				StartCoroutine(ResetTurnRight());
 			}
 		
 			else if(playerTransform.transform.position.x < transform.position.x && !faceLeft && faceRight)
 			{	
+				isTurning = true;
+				animator.SetBool("IsTurn", true);
+		
 				StartCoroutine(ResetTurnLeft());
 			}
 		}
@@ -57,10 +63,7 @@ public class PommeTurn : MonoBehaviour
 	
 	private IEnumerator ResetTurnRight()
 	{
-		isTurning = true;
-		animator.SetBool("IsTurn", true);
-		
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.7f);
 		
 		if(animator != null)
 		{
@@ -74,16 +77,11 @@ public class PommeTurn : MonoBehaviour
 		faceLeft = false;
 		scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
 		transform.localScale = scale;
-		
-		Move();
 	}
 	
 	private IEnumerator ResetTurnLeft()
 	{
-		isTurning = true;
-		animator.SetBool("IsTurn", true);
-		
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.7f);
 		
 		if(animator != null)
 		{
@@ -97,8 +95,6 @@ public class PommeTurn : MonoBehaviour
 		faceLeft = false;
 		scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
 		transform.localScale = scale;
-		
-		Move();
 	}
 	
 	public bool IsTurning()
@@ -118,6 +114,8 @@ public class PommeTurn : MonoBehaviour
 			rb.constraints = RigidbodyConstraints2D.FreezeAll;
             isFrozen = true;
 		}
+		
+		Move();
 	}
 	
 	public void Move()
