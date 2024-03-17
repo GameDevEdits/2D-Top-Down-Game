@@ -215,5 +215,4 @@ public class PMovement2 : MonoBehaviour
     {
         moveSpeed = 6f;
     }
-
 }
