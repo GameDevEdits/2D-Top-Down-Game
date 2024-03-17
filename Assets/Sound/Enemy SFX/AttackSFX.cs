@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackSFX : MonoBehaviour
 {
     public AudioSource audioSource; // Assign your audio source in the Inspector
+    public FootstepsSFX footstepsSFX; // Reference to the FootstepsSFX script
 
     // This method will be called from the animation event
     public void PlayAttackSFX()
@@ -14,6 +15,11 @@ public class AttackSFX : MonoBehaviour
             // Check if the audio source is not already playing
             if (!audioSource.isPlaying)
             {
+                // Stop the footsteps sound effect if it is playing
+                if (footstepsSFX != null && footstepsSFX.audioSource.isPlaying)
+                {
+                    footstepsSFX.audioSource.Stop();
+                }
                 audioSource.Play();
             }
         }
