@@ -172,6 +172,13 @@ public class EnemyAI : MonoBehaviour
             myScriptComponentSeven.enabled = false;
         }
 
+        StarfruitAttack myScriptComponentEight = GetComponent<StarfruitAttack>();
+        if (myScriptComponentEight != null)
+        {
+            myScriptComponentEight.enabled = false;
+        }
+
+
         // Spawn a health drop
         SpawnHealthDrop();
 		SpawnerEnablerScript.enemiesNeeded--;
