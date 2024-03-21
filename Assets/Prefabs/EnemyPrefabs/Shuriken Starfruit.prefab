@@ -255,7 +255,7 @@ MonoBehaviour:
   chaseRadius: 20
   attackRadius: 5
   damageRadius: 2.5
-  speed: 4.5
+  speed: 5
   dashSpeedMultiplier: 2
   dashDamage: 50
   maxDamagePerCycle: 200
