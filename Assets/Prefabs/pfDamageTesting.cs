@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class pfDamageTesting : MonoBehaviour
 {
-	[SerializeField]private Transform pfDamagePopup;
+	[SerializeField]private RectTransform pfDamagePopup;
 	
     private void Start()
 	{
