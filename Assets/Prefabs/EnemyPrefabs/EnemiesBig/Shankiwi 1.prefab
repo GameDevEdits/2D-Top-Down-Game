@@ -56,8 +56,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4712277251460098955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 0.26, z: 0}
-  m_LocalScale: {x: 5, y: 8, z: 1}
+  m_LocalPosition: {x: -0.12, y: 0.59, z: 0}
+  m_LocalScale: {x: 7, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4712277252364624486}
@@ -340,7 +340,7 @@ MonoBehaviour:
   initialFreezeDuration: 2
   speed: 4.5
   checkRadius: 20
-  attackRadius: 1.5
+  attackRadius: 2
   avoidanceRadius: 2
   whatIsPlayer:
     serializedVersion: 2
@@ -362,10 +362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 19277014281560344, guid: 1dc17daf22e085344a5c0ba0d8e6aacc, type: 3}
-  slashPrefab: {fileID: 2607856714829579350, guid: 702d2ffaff274be46a165fe0381dea1b, type: 3}
+  slashPrefab: {fileID: 2607856714829579350, guid: a11da3eb5c3e38c4a9a78f81b1ae1d43, type: 3}
   bulletSpeed: 20
   bulletDamage: 25
-  damageRadius: 3
+  damageRadius: 4
   slashOffset: 0
 --- !u!114 &4712277252364624487
 MonoBehaviour:
@@ -1005,8 +1005,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4712277253158114809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.1, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalPosition: {x: -0.16, y: -0.27, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4712277252364624486}

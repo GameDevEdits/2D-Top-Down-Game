@@ -56,8 +56,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4103027825914706141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.11, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalPosition: {x: -0.03, y: 0.5, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4103027826815380583}
@@ -145,8 +145,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4103027826142611743}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 0.05, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalPosition: {x: -0.33, y: 0.13, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4103027826815380583}
@@ -601,7 +601,7 @@ MonoBehaviour:
   initialFreezeDuration: 2
   speed: 4.5
   checkRadius: 20
-  attackRadius: 1.5
+  attackRadius: 2
   avoidanceRadius: 2
   whatIsPlayer:
     serializedVersion: 2
@@ -626,7 +626,7 @@ MonoBehaviour:
   slashPrefab: {fileID: 0}
   bulletSpeed: 20
   bulletDamage: 100
-  damageRadius: 5
+  damageRadius: 6
   slashOffset: 1
 --- !u!114 &4103027826815380588
 MonoBehaviour:

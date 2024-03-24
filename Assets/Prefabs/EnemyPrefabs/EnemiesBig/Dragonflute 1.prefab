@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c92e26bfb40f34783f3c42a5c3ffba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6105145299025315684, guid: 8a54c5fc7d85a944589d0776d4638619, type: 3}
+  bulletPrefab: {fileID: 6105145299025315684, guid: 74869e8e628895a48b0bf67b885705fb, type: 3}
   bulletSpeed: 10
   firePoint: {fileID: 1845944233709262730}
   spreadAngle: 15
@@ -1033,8 +1033,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845944234976677268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2999941, y: 0.05, z: 0.000000834465}
-  m_LocalScale: {x: 1.6666665, y: 1.6666665, z: 1}
+  m_LocalPosition: {x: -0, y: -0.01, z: 0.000000834465}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1845944234752450697}
