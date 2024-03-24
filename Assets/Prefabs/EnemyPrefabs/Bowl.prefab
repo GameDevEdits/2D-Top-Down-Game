@@ -14,14 +14,15 @@ GameObject:
   - component: {fileID: 3270615802148939594}
   - component: {fileID: 3270615802148939593}
   - component: {fileID: 3270615802148939592}
-  - component: {fileID: 3270615802148939591}
+  - component: {fileID: -5240267725671755570}
   - component: {fileID: 3270615802148939595}
   - component: {fileID: 5029264629898620073}
   - component: {fileID: 3327879130082959426}
   - component: {fileID: 7795027171914209430}
   - component: {fileID: 1780442261085216448}
   - component: {fileID: 7426820195019384038}
-  m_Layer: 8
+  - component: {fileID: 2081115120705309764}
+  m_Layer: 14
   m_Name: Bowl
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 100
---- !u!114 &3270615802148939591
+--- !u!114 &-5240267725671755570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3270615802148939587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ee30928e86144489891b9f2fa47a0a, type: 3}
+  m_Script: {fileID: 11500000, guid: df35fb755ce18fc41ab1bdc1dc43731d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3270615802148939588}
@@ -418,5 +419,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c2fb4715af53aa46bc145101b8feaa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2081115120705309764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270615802148939587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6969f0b770f3e324394e0ba3f2388690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

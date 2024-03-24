@@ -17,6 +17,7 @@ TagManager:
   - Orange
   - Slice
   - Bush
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - HealthDrop
   - PlayerBullet
   - Mimic
-  - 
+  - InvincibleBullet
   - 
   - 
   - 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3461451435107431904}
   - component: {fileID: 8630145719596580659}
   - component: {fileID: 3461451435107431915}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: PewBullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}

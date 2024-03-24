@@ -662,7 +662,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f520540524794004dbb1aeaf2e9c9b05, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1001,6 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 3353008839450981866}
+  footstepsSFX: {fileID: 5005426933184018164}
 --- !u!82 &3353008839450981866
 AudioSource:
   m_ObjectHideFlags: 0

@@ -492,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 732835921000987812}
+  footstepsSFX: {fileID: 7796572904688474875}
 --- !u!82 &732835921000987812
 AudioSource:
   m_ObjectHideFlags: 0
