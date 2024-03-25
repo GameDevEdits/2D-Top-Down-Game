@@ -5,7 +5,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] objectsToSpawn;
     public float[] spawnChances;
     public float spawnRadius = 15f; // Radius within which objects will be spawned.
-    public static int numberOfEnemiesToSpawn = 3; // Number of enemies to spawn.
+    public static int numberOfEnemiesToSpawn = 5; // Number of enemies to spawn.
 
     private Transform playerTransform;
 

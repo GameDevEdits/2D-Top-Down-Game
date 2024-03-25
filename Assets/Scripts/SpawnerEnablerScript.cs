@@ -15,6 +15,7 @@ public class SpawnerEnablerScript : MonoBehaviour
     public GameObject wavesCompletedIcon;
 	public static int enemiesNeeded;
 	public static int wave = 0;
+	public static int roomsCleared = 0;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -36,6 +37,12 @@ public class SpawnerEnablerScript : MonoBehaviour
 		if(enemiesNeeded == 0 && wave == 2)
 		{
 			nextRoom();
+			roomsCleared++;
+		}
+		else if(enemiesNeeded == 0 && wave >= 2 && roomsCleared >= 4)
+		{
+			StartCoroutine(Wave2());
+			wave++;
 		}
 	}
 
