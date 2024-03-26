@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - pfDamagePopup: {instanceID: 0}
+  - pfDamagePopup: {fileID: 3808015508190466793, guid: 385b0ac3371e51a40bf909188d240913, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -8,6 +8,8 @@ public class pfDamageTesting : MonoBehaviour
 	
     private void Start()
 	{
-		Instantiate(pfDamagePopup, Vector3.zero, Quaternion.identity);
+		Transform damagePopupTransform = Instantiate(pfDamagePopup, Vector3.zero, Quaternion.identity);
+		DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
+		damagePopup.Setup(300);
 	}
 }
