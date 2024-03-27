@@ -28,12 +28,30 @@ public class EnemySpawner : MonoBehaviour
         // Shuffle spawn chances and objects array.
         ShuffleArrays();
 
+        float totalChance = 0f;
+        foreach (float chance in spawnChances)
+        {
+            totalChance += chance;
+        }
+
         for (int spawnCount = 0; spawnCount < numberOfEnemiesToSpawn; spawnCount++)
         {
-            Vector3 spawnPosition = GetValidSpawnPosition();
+            float randomValue = Random.Range(0f, totalChance);
+            float cumulativeChance = 0f;
 
-            // Instantiate the selected object at the calculated position.
-            Instantiate(objectsToSpawn[spawnCount], spawnPosition, Quaternion.identity);
+            for (int i = 0; i < objectsToSpawn.Length; i++)
+            {
+                cumulativeChance += spawnChances[i];
+
+                if (randomValue <= cumulativeChance)
+                {
+                    Vector3 spawnPosition = GetValidSpawnPosition();
+
+                    // Instantiate the selected object at the calculated position.
+                    Instantiate(objectsToSpawn[i], spawnPosition, Quaternion.identity);
+                    break;
+                }
+            }
         }
     }
 
