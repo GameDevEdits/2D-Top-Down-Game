@@ -45,8 +45,8 @@ public class AvacabowlBullet : MonoBehaviour
         }
         else if (other.CompareTag("Wall"))
         {
-            // Reflect the direction of the bullet upon collision with a wall
-            ReflectOffWall(other);
+            // Reverse the horizontal direction of the bullet
+            direction = new Vector2(-direction.x, direction.y);
         }
         else if (!other.CompareTag("Enemy"))
         {
@@ -63,11 +63,20 @@ public class AvacabowlBullet : MonoBehaviour
 
     void HandleCollision(GameObject player)
     {
+        if (player != null)
+        {
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
+        }
+
         DisableColliderAndFreezePosition();
 
         StartCoroutine(DelayedSortingOrderChange());
 
-        // Trigger explosion animation
+        // Trigger explosion animation if the collision is not with a wall
         if (animator != null)
         {
             animator.SetBool("Explode", true);
@@ -82,42 +91,7 @@ public class AvacabowlBullet : MonoBehaviour
             Debug.LogWarning("Animator component not found on the missile GameObject.");
             Destroy(gameObject);
         }
-
-        if (player != null)
-        {
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage);
-            }
-        }
     }
-
-    void ReflectOffWall(Collider2D wallCollider)
-    {
-        // Get the contact points of collision
-        ContactPoint2D[] contacts = new ContactPoint2D[1];
-        wallCollider.GetContacts(contacts);
-
-        if (contacts.Length > 0)
-        {
-            // Calculate the normal of the collision surface
-            Vector2 wallNormal = contacts[0].normal;
-
-            // Calculate the velocity vector of the bullet
-            Vector2 velocity = direction.normalized * speed;
-
-            // Calculate the reflected velocity
-            Vector2 reflectedVelocity = Vector2.Reflect(velocity, wallNormal);
-
-            // Update the direction of the bullet to the reflected velocity
-            direction = reflectedVelocity.normalized;
-
-            // Move the bullet slightly away from the wall to avoid sticking
-            transform.position = contacts[0].point + (wallNormal * 0.01f);
-        }
-    }
-
 
     void DisableColliderAndFreezePosition()
     {

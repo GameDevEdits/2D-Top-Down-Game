@@ -24,11 +24,5 @@ public class RassBushTopBottom : MonoBehaviour
             // Set bush 1's "bushDestroy" to true
             bush1Animator.SetBool("bushDestroy", true);
         }
-
-        if (bush2Animator.GetBool("bushAsh"))
-        {
-            // Set bush 1's "bushDestroy" to true
-            bush1Animator.SetBool("bushAsh", true);
-        }
     }
 }

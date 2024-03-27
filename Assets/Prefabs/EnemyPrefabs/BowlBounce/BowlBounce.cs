@@ -2,24 +2,37 @@ using UnityEngine;
 
 public class BowlBounce : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private Rigidbody2D rb;
+    private Vector2 lastVelocity;
+
+    void Start()
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        lastVelocity = rb.velocity;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
         {
-            // Get the contact point of collision
-            ContactPoint2D contactPoint = collision.GetContact(0);
+            // Get the current speed of the ball
+            float speed = lastVelocity.magnitude;
 
-            // Calculate the normal of the collision surface
-            Vector2 wallNormal = contactPoint.normal;
+            // Determine the direction of collision
+            Vector2 direction = other.ClosestPoint(transform.position) - (Vector2)transform.position;
 
-            // Calculate the velocity vector of the projectile
-            Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+            // Flip the velocity components based on collision direction
+            Vector2 newVelocity = new Vector2(
+                Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? -lastVelocity.x : lastVelocity.x,
+                Mathf.Abs(direction.y) > Mathf.Abs(direction.x) ? -lastVelocity.y : lastVelocity.y
+            );
 
-            // Calculate the reflected velocity
-            Vector2 reflectedVelocity = Vector2.Reflect(velocity, wallNormal);
-
-            // Apply the reflected velocity to the projectile
-            GetComponent<Rigidbody2D>().velocity = reflectedVelocity;
+            // Apply the new velocity while maintaining the speed
+            rb.velocity = newVelocity.normalized * speed;
         }
     }
 }
