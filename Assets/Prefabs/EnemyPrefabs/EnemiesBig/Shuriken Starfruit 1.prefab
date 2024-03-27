@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  maxHealth: 125
-  currentHealth: 125
+  maxHealth: 190
+  currentHealth: 190
   spawnPoint: {fileID: 1886958755135879764}
   healthDrops:
   - itemPrefab: {fileID: 5242009203777966477, guid: 9bd18255eb1fcdc49aff9aec83b61a23, type: 3}
@@ -257,7 +257,7 @@ MonoBehaviour:
   damageRadius: 2.5
   speed: 5
   dashSpeedMultiplier: 2
-  dashDamage: 50
+  dashDamage: 75
   maxDamagePerCycle: 200
 --- !u!114 &7495322888742656038
 MonoBehaviour:

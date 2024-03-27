@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  maxHealth: 125
-  currentHealth: 125
+  maxHealth: 190
+  currentHealth: 190
   spawnPoint: {fileID: 5718927548967320767}
   healthDrops:
   - itemPrefab: {fileID: 5242009203777966477, guid: 9bd18255eb1fcdc49aff9aec83b61a23, type: 3}

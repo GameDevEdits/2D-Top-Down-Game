@@ -542,8 +542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  maxHealth: 75
-  currentHealth: 75
+  maxHealth: 115
+  currentHealth: 115
   spawnPoint: {fileID: 8655378757588513251}
   healthDrops:
   - itemPrefab: {fileID: 5242009203777966477, guid: 9bd18255eb1fcdc49aff9aec83b61a23, type: 3}
@@ -625,7 +625,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 19277014281560344, guid: 1dc17daf22e085344a5c0ba0d8e6aacc, type: 3}
   slashPrefab: {fileID: 0}
   bulletSpeed: 20
-  bulletDamage: 100
+  bulletDamage: 150
   damageRadius: 6
   slashOffset: 1
 --- !u!114 &4103027826815380588
