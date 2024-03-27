@@ -55,6 +55,12 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("EnemyIndex");
     }
 
+    public void RetryRoom1()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Room 1");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
