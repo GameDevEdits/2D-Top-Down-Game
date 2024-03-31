@@ -13,6 +13,8 @@ public class BookOpen : MonoBehaviour
     private Animator animator;
     private bool isOpen = false;
 
+    private bool colliderClicked = false; // Add a flag to track if the collider has been clicked
+
     private void Start()
     {
         // Get the Animator component attached to the same game object
@@ -21,8 +23,8 @@ public class BookOpen : MonoBehaviour
 
     private void Update()
     {
-        // Check for left mouse click
-        if (Input.GetMouseButtonDown(0))
+        // Check for left mouse click and if the collider hasn't been clicked before
+        if (Input.GetMouseButtonDown(0) && !colliderClicked)
         {
             // Cast a ray from the mouse position in 2D space
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -31,17 +33,17 @@ public class BookOpen : MonoBehaviour
             // Check if the ray hits the specified collider
             if (hit.collider != null && hit.collider == bookCollider)
             {
-                // Toggle the book state
-                isOpen = !isOpen;
+                // Set the flag to true indicating the collider has been clicked
+                colliderClicked = true;
 
                 // Set "openBook" to the book state in the Animator
                 if (animator != null)
                 {
-                    animator.SetBool("openBook", isOpen);
+                    animator.SetBool("openBook", true);
                 }
 
                 // Enable or disable objects based on the book state with a delay
-                StartCoroutine(isOpen ? EnableObjectsWithDelay() : DisableObjectsInstant());
+                StartCoroutine(EnableObjectsWithDelay());
             }
         }
     }

@@ -47,6 +47,21 @@ public class FlipPage : MonoBehaviour
                 }
                 else
                 {
+                    // Check if objects to enable are already active
+                    bool objectsActive = true;
+                    foreach (GameObject obj in objectsToEnable)
+                    {
+                        if (!obj.activeSelf)
+                        {
+                            objectsActive = false;
+                            break;
+                        }
+                    }
+
+                    // If objects are already active, return without doing anything
+                    if (objectsActive)
+                        return;
+
                     ResetPage();
                 }
             }
