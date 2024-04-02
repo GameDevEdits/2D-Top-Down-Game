@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2922335743291234045}
   - component: {fileID: 8578346457463903624}
   - component: {fileID: 8416561380337564513}
+  - component: {fileID: 2983261465596823668}
+  - component: {fileID: -4301914739310230744}
   m_Layer: 0
   m_Name: pfDamagePopup
   m_TagString: Untagged
@@ -172,3 +174,35 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8578346457463903624}
   m_maskType: 0
+--- !u!114 &2983261465596823668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988710618815011046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c65b6b943348374e9cf71213d146914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &-4301914739310230744
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988710618815011046}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42a3e56939590ad4ca4c01592163f810, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
