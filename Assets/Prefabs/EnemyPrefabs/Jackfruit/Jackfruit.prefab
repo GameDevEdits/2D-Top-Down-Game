@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2702407265433655085}
   - component: {fileID: 2702407265433655093}
   - component: {fileID: 2702407265433655101}
-  - component: {fileID: 2702407265433655103}
+  - component: {fileID: 2881867147950286519}
   - component: {fileID: 2702407265433655096}
   - component: {fileID: 2702407265433655088}
   - component: {fileID: 2702407265433655100}
@@ -210,7 +210,7 @@ MonoBehaviour:
   pommeBlock: {fileID: 0}
   chosenAudioSource: {fileID: 8842801426973778779}
   blockCooldown: 1
---- !u!114 &2702407265433655103
+--- !u!114 &2881867147950286519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,13 +219,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2702407265433655090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6190563dcb04a3c4da42655f5166e1f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6365031b3c4ac244ca7b8ff1b22f8f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initialFreezeDuration: 2
-  speed: 4.5
+  speed: 2
   checkRadius: 20
-  attackRadius: 3.5
+  attackRadius: 3
   avoidanceRadius: 2
   whatIsPlayer:
     serializedVersion: 2
@@ -531,7 +531,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 595802e2055493f4184b2c2755849c86, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b8d688d27449c1d489874bc66d135a95, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.6
   m_Pitch: 1
