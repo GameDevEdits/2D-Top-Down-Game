@@ -345,6 +345,9 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 32768
   bulletPrefab: {fileID: 6989057312661892431, guid: bdf451eaa8e1c5242af81206546da408, type: 3}
   bulletSpeed: 20
   bulletDamage: 20
