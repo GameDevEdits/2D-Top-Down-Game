@@ -19,7 +19,11 @@ public class BulletDamage : MonoBehaviour
             // Disable the collider and freeze the position
             DisableColliderAndFreezePosition();
         }
-        else if (!other.CompareTag("Enemy") && !other.CompareTag("Wall"))
+        else if (other.CompareTag("PlayerBullet"))
+        {
+            DisableColliderAndFreezePosition();
+        }
+        else if (other.CompareTag("Player") || other.CompareTag("PlayerBullet"))
         {
             // Disable the collider and freeze the position
             DisableColliderAndFreezePosition();

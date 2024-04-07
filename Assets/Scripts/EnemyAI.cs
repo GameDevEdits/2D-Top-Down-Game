@@ -35,6 +35,8 @@ public class EnemyAI : MonoBehaviour
 
     private bool canTakeDamage = false;
 
+    public KnockbackFeedback knockbackFeedback;
+
 
     private void Start()
     {
@@ -77,6 +79,14 @@ public class EnemyAI : MonoBehaviour
             if (currentHealth <= 0)
             {
                 Die();
+            }
+            else
+            {
+                // Apply knockback when taking damage
+                if (knockbackFeedback != null)
+                {
+                    knockbackFeedback.PlayFeedback(gameObject);
+                }
             }
         }
     }

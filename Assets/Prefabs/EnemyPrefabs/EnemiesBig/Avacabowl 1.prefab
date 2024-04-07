@@ -255,6 +255,7 @@ MonoBehaviour:
   pommeBlock: {fileID: 0}
   chosenAudioSource: {fileID: 287502978332655077}
   blockCooldown: 1
+  knockbackFeedback: {fileID: 0}
 --- !u!114 &8449309764113872437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef97902c1e807564cb0ad97c323dd16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3270615802148939587, guid: 0abf7cb55bff4324d82d612eb54aacb4, type: 3}
+  bulletPrefab: {fileID: 3270615802148939587, guid: ece7e2062b27d164aa543eca8d1cced1, type: 3}
   bulletSpeed: 5
   bulletDamage: 0
   firePoint: {fileID: 8449309762948776250}

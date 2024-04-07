@@ -17,22 +17,20 @@ public class BowlBounce : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            // Get the current speed of the ball
-            float speed = lastVelocity.magnitude;
+        // Get the current speed of the ball
+        float speed = lastVelocity.magnitude;
 
-            // Determine the direction of collision
-            Vector2 direction = other.ClosestPoint(transform.position) - (Vector2)transform.position;
+        // Determine the direction of collision
+        Vector2 direction = other.ClosestPoint(transform.position) - (Vector2)transform.position;
 
-            // Flip the velocity components based on collision direction
-            Vector2 newVelocity = new Vector2(
-                Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? -lastVelocity.x : lastVelocity.x,
-                Mathf.Abs(direction.y) > Mathf.Abs(direction.x) ? -lastVelocity.y : lastVelocity.y
-            );
+        // Flip the velocity components based on collision direction
+        Vector2 newVelocity = new Vector2(
+            Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? -lastVelocity.x : lastVelocity.x,
+            Mathf.Abs(direction.y) > Mathf.Abs(direction.x) ? -lastVelocity.y : lastVelocity.y
+        );
 
-            // Apply the new velocity while maintaining the speed
-            rb.velocity = newVelocity.normalized * speed;
-        }
+        // Apply the new velocity while maintaining the speed
+        rb.velocity = newVelocity.normalized * speed;
+    
     }
 }

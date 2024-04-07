@@ -41,27 +41,20 @@ public class AvacabowlBullet : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            HandleCollision(other.gameObject);
+            HandlePlayerCollision(other.gameObject);
         }
-        else if (other.CompareTag("Wall"))
+        else if (other.CompareTag("PlayerBullet"))
         {
-            // Reverse the horizontal direction of the bullet
+            HandlePlayerBulletCollision(other.gameObject);
+        }
+        else if (!other.CompareTag("PlayerBullet") && !other.CompareTag("Player"))
+        {
+            // Handle collision with walls, enemies, or obstacles by reversing direction
             direction = new Vector2(-direction.x, direction.y);
-        }
-        else if (!other.CompareTag("Enemy"))
-        {
-            HandleCollision(null);
-        }
-
-        // Check if the other collider has a script named "HomingBullet" and disable it
-        HomingBullet homingBulletScript = other.GetComponent<HomingBullet>();
-        if (homingBulletScript != null)
-        {
-            homingBulletScript.enabled = false;
         }
     }
 
-    void HandleCollision(GameObject player)
+    void HandlePlayerCollision(GameObject player)
     {
         if (player != null)
         {
@@ -72,11 +65,7 @@ public class AvacabowlBullet : MonoBehaviour
             }
         }
 
-        DisableColliderAndFreezePosition();
-
-        StartCoroutine(DelayedSortingOrderChange());
-
-        // Trigger explosion animation if the collision is not with a wall
+        // Trigger explosion animation
         if (animator != null)
         {
             animator.SetBool("Explode", true);
@@ -93,34 +82,22 @@ public class AvacabowlBullet : MonoBehaviour
         }
     }
 
-    void DisableColliderAndFreezePosition()
+    void HandlePlayerBulletCollision(GameObject playerBullet)
     {
-        // Disable the collider
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
+        // Trigger explosion animation
+        if (animator != null)
         {
-            collider.enabled = false;
+            animator.SetBool("Explode", true);
+            hasCollided = true; // Set a flag to ensure the explosion animation is not triggered multiple times
+
+            // Start the coroutine to wait for the explosion animation to finish before destroying the GameObject
+            StartCoroutine(DestroyAfterAnimation());
         }
-
-        // Freeze the position
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
+        else
         {
-            rb.velocity = Vector2.zero; // Stop rigidbody movement
-            rb.gravityScale = 0f; // Disable gravity (if applicable)
-            rb.isKinematic = true; // Make the rigidbody kinematic
-        }
-    }
-
-    IEnumerator DelayedSortingOrderChange()
-    {
-        yield return null;  // Wait for the next frame.
-
-        // Change sorting order.
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.sortingOrder += 500;
+            // Log a warning if the Animator component is not found
+            Debug.LogWarning("Animator component not found on the missile GameObject.");
+            Destroy(gameObject);
         }
     }
 

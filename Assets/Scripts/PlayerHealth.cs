@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
     private bool isBlocking = false;
 
     private bool canTakeDamage = true;
+    private bool hasTakenDamage = false;
 
     public Volume globalVolume;
     private ColorAdjustments colorAdjustments;
@@ -90,12 +91,15 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Method to take damage and update health
     public void TakeDamage(int damage)
     {
         if (!isDead && currentHealth > 0 && canTakeDamage)
         {
             currentHealth -= damage;
+            hasTakenDamage = true;
+
+            // Start the damage cooldown coroutine only when actual damage is taken
+            StartCoroutine(DamageCooldownCoroutine());
 
             // Check if the player has been defeated
             if (currentHealth <= 0)
@@ -112,6 +116,18 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator DamageCooldownCoroutine()
+    {
+        canTakeDamage = true;
+        yield return new WaitForSeconds(0.5f);
+        // Start the cooldown only when damage is taken
+        canTakeDamage = false;
+        hasTakenDamage = true;
+        yield return new WaitForSeconds(1.0f);
+        canTakeDamage = true;
+    }
+
 
     // Method to gain health
     public void GainHealth(int amount)
