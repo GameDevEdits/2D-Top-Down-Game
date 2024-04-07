@@ -441,6 +441,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647618104}
     m_Modifications:
+    - target: {fileID: 4899224571432323015, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
     - target: {fileID: 4899224571432323034, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -528,6 +532,10 @@ PrefabInstance:
     - target: {fileID: 4899224571432323035, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
       propertyPath: m_Name
       value: pfDamagePopupCrit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899224571432323035, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
