@@ -125,7 +125,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,7 +146,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,7 +167,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,7 +188,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -209,7 +209,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,7 +230,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,7 +251,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -272,7 +272,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -293,7 +293,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -314,7 +314,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -335,7 +335,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -356,7 +356,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -377,7 +377,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -398,7 +398,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -421,20 +421,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OrangeSideIdleSpriteSheet_6: -1037758587
+      OrangeSideIdleSpriteSheet_6: 1389778549
       OrangeSideIdleSpriteSheet_1: 1896263146
       OrangeSideIdleSpriteSheet_2: -282376269
       OrangeSideIdleSpriteSheet_3: -737281507
-      OrangeSideIdleSpriteSheet_13: 1981297389
-      OrangeSideIdleSpriteSheet_9: 2009929205
-      OrangeSideIdleSpriteSheet_10: 1200199902
-      OrangeSideIdleSpriteSheet_11: -1580742039
-      OrangeSideIdleSpriteSheet_12: 1617341490
-      OrangeSideIdleSpriteSheet_0: 1389778549
-      OrangeSideIdleSpriteSheet_8: -425415229
-      OrangeSideIdleSpriteSheet_5: 1963325485
-      OrangeSideIdleSpriteSheet_4: 445358702
-      OrangeSideIdleSpriteSheet_7: 1220503096
+      OrangeSideIdleSpriteSheet_13: 445358702
+      OrangeSideIdleSpriteSheet_9: 1963325485
+      OrangeSideIdleSpriteSheet_10: -1037758587
+      OrangeSideIdleSpriteSheet_11: 1220503096
+      OrangeSideIdleSpriteSheet_12: -425415229
+      OrangeSideIdleSpriteSheet_0: 2009929205
+      OrangeSideIdleSpriteSheet_8: 1200199902
+      OrangeSideIdleSpriteSheet_5: -1580742039
+      OrangeSideIdleSpriteSheet_4: 1617341490
+      OrangeSideIdleSpriteSheet_7: 1981297389
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
