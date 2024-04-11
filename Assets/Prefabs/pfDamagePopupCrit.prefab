@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4899224571432323015}
   - component: {fileID: 4899224571432323012}
   - component: {fileID: 4899224571432323013}
+  - component: {fileID: -7819798077870425703}
   m_Layer: 0
   m_Name: pfDamagePopupCrit
   m_TagString: Untagged
@@ -78,8 +79,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 113999363
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4899224571432323015
@@ -129,8 +130,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 160
-  m_fontSizeBase: 160
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -206,3 +207,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c65b6b943348374e9cf71213d146914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &-7819798077870425703
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4899224571432323035}
+  m_CullTransparentMesh: 1
