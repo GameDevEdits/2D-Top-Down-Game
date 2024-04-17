@@ -296,5 +296,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: textHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 579572831508916655, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
+      propertyPath: m_text
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 579572831508916655, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
+    - target: {fileID: 579572831508916659, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562622818963311314, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991066741306091861, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
+      propertyPath: m_text
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991066741306091861, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
