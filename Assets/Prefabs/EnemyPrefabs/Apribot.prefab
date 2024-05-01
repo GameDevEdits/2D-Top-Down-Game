@@ -169,12 +169,18 @@ MonoBehaviour:
   speed: 0
   maxHealth: 200
   currentHealth: 200
+  spawnPoint: {fileID: 0}
+  healthDrops: []
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}
   scoreText: {fileID: 0}
   scoreIncrement: 200
   killIncrement: 1
   scoreScriptableObject: {fileID: 11400000, guid: dffdf52987bb3fa408422cd1a9af8072, type: 2}
+  pommeBlock: {fileID: 0}
+  chosenAudioSource: {fileID: 0}
+  blockCooldown: 1
+  knockbackFeedback: {fileID: 0}
 --- !u!114 &6431770395444286308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6190563dcb04a3c4da42655f5166e1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialFreezeDuration: 2
   speed: 2
   checkRadius: 100
   attackRadius: 5
@@ -224,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef97902c1e807564cb0ad97c323dd16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1322727267482284849, guid: fc6c562fc326abc408302e6b429e8ca8, type: 3}
+  bulletPrefab: {fileID: 58437161947870661, guid: 2d281219773e71e4d99797215591792c, type: 3}
   bulletSpeed: 5
   bulletDamage: 0
   firePoint: {fileID: 6431770396788687356}

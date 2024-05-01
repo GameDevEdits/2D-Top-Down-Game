@@ -325,6 +325,7 @@ MonoBehaviour:
   pommeBlock: {fileID: 0}
   chosenAudioSource: {fileID: -7038476211679029748}
   blockCooldown: 1
+  knockbackFeedback: {fileID: 0}
 --- !u!114 &4712277252364624488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +365,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 19277014281560344, guid: 1dc17daf22e085344a5c0ba0d8e6aacc, type: 3}
   slashPrefab: {fileID: 2607856714829579350, guid: a11da3eb5c3e38c4a9a78f81b1ae1d43, type: 3}
   bulletSpeed: 20
-  bulletDamage: 50
+  bulletDamage: 100
   damageRadius: 4
   slashOffset: 0
 --- !u!114 &4712277252364624487

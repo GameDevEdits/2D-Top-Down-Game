@@ -95,7 +95,17 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isDead && currentHealth > 0 && canTakeDamage)
         {
+            // Check if the damage taken will result in reaching a multiple of 50 or 100
+            int previousHealth = currentHealth;
             currentHealth -= damage;
+            int newHealth = currentHealth;
+
+            if (((previousHealth - 1) / 50 != (newHealth - 1) / 50) || ((previousHealth - 1) / 100 != (newHealth - 1) / 100)) // If health crosses a 50 or 100-multiple boundary
+            {
+                // Stop taking damage for 1 second
+                StartCoroutine(StopTakingDamageForOneSecond());
+            }
+
             hasTakenDamage = true;
 
             // Start the damage cooldown coroutine only when actual damage is taken
@@ -128,6 +138,12 @@ public class PlayerHealth : MonoBehaviour
         canTakeDamage = true;
     }
 
+    private IEnumerator StopTakingDamageForOneSecond()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(1.0f);
+        canTakeDamage = true;
+    }
 
     // Method to gain health
     public void GainHealth(int amount)

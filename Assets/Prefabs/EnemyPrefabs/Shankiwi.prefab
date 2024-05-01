@@ -411,7 +411,7 @@ MonoBehaviour:
   initialFreezeDuration: 2
   speed: 4.5
   checkRadius: 20
-  attackRadius: 1.5
+  attackRadius: 1
   avoidanceRadius: 2
   whatIsPlayer:
     serializedVersion: 2
@@ -435,7 +435,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 19277014281560344, guid: 1dc17daf22e085344a5c0ba0d8e6aacc, type: 3}
   slashPrefab: {fileID: 2607856714829579350, guid: 702d2ffaff274be46a165fe0381dea1b, type: 3}
   bulletSpeed: 20
-  bulletDamage: 25
+  bulletDamage: 50
   damageRadius: 3
   slashOffset: 0
 --- !u!114 &4712277252364624487
