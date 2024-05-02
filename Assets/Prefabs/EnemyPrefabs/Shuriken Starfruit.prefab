@@ -309,7 +309,7 @@ MonoBehaviour:
   pommeBlock: {fileID: 0}
   chosenAudioSource: {fileID: 3977712460199177293}
   blockCooldown: 1
-  knockbackFeedback: {fileID: 0}
+  knockbackFeedback: {fileID: -435907234094251708}
 --- !u!114 &5718320881261408400
 MonoBehaviour:
   m_ObjectHideFlags: 0

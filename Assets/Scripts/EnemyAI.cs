@@ -119,8 +119,6 @@ public class EnemyAI : MonoBehaviour
         IncrementScore();
         IncrementKills();
 
-        StartCoroutine(DelayedSortingOrderChange());
-
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -223,16 +221,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    IEnumerator DelayedSortingOrderChange()
-    {
-        yield return null;
-
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.sortingOrder -= 10;
-        }
-    }
 
     IEnumerator BlockCooldown()
     {

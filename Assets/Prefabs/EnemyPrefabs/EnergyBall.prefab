@@ -16,7 +16,9 @@ GameObject:
   - component: {fileID: 2055738036109326622}
   - component: {fileID: 2726298101597751142}
   - component: {fileID: 8229740469027544314}
-  m_Layer: 0
+  - component: {fileID: 4166636818831316871}
+  - component: {fileID: 5875476266373033905}
+  m_Layer: 14
   m_Name: EnergyBall
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -183,5 +185,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b66e35bccaa26a04caa6592284b8114c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4166636818831316871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58437161947870661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e5cffb43f78d94baf974ac9c9fda0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5875476266373033905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58437161947870661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7b841a3c2869d4b90fa6d61dc9c3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
