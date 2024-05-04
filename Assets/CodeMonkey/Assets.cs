@@ -40,6 +40,8 @@ namespace CodeMonkey {
         public Sprite s_Circle;
 
         public Material m_White;
+		
+		public Transform pfDamagePopup;
 
     }
 

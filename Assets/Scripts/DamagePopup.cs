@@ -5,6 +5,13 @@ using TMPro;
 
 public class DamagePopup : MonoBehaviour
 {
+	/*public static DamagePopup Create()
+	{
+		Transform damagePopupTransform = Instantiate(pfDamagePopup, Vector3.zero, Quaternion.identity);
+		DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
+		damagePopup.Setup(damage);
+	}*/
+	
 	private TextMeshPro textMesh;
 	
 	private void Awake()
@@ -14,6 +21,6 @@ public class DamagePopup : MonoBehaviour
 	
     public void Setup(int damageAmount)
 	{
-		textMesh.text = damageAmount.ToString();
+		textMesh.SetText(damageAmount.ToString());
 	}
 }

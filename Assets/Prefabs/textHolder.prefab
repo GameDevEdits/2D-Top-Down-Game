@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 579572830012007749}
   - component: {fileID: 579572830012007748}
+  - component: {fileID: 2096369578378725632}
   m_Layer: 0
   m_Name: textHolder
   m_TagString: DMGPopup
@@ -29,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2343339152271426761}
+  - {fileID: 8710875618429334991}
   - {fileID: 579572831508916658}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,6 +55,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2096369578378725632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579572830012007754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f80482d7cc22841a8c979a1d17dcd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: {fileID: 3916335621083441727, guid: 24092133bb591d34b928b32d478ee695, type: 3}
+  critPopupText: {fileID: 4899224571432323035, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
 --- !u!1001 &579572829942075956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183,9 +198,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24092133bb591d34b928b32d478ee695, type: 3}
---- !u!224 &2343339152271426761 stripped
+--- !u!224 &8710875618429334991 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2922335743291234045, guid: 24092133bb591d34b928b32d478ee695, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8135806955323992059, guid: 24092133bb591d34b928b32d478ee695, type: 3}
   m_PrefabInstance: {fileID: 579572829942075956}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5473708225089547880
