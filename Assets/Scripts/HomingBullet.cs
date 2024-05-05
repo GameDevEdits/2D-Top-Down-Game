@@ -3,8 +3,10 @@ using UnityEngine;
 public class HomingBullet : MonoBehaviour
 {
     private Transform player;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f; // Initial speed
+    public float maxSpeed = 7f; // Maximum speed
     public float rotationSpeed = 180f; // Adjust this value for the desired rotation speed
+    private float timeElapsed = 0f; // Time elapsed since the bullet's creation
 
     public void Start()
     {
@@ -14,6 +16,12 @@ public class HomingBullet : MonoBehaviour
 
     private void Update()
     {
+        // Increment timeElapsed
+        timeElapsed += Time.deltaTime;
+
+        // Increase moveSpeed gradually up to maxSpeed
+        moveSpeed = Mathf.Min(moveSpeed + (0.5f * Time.deltaTime), maxSpeed);
+
         // Check if the player is still valid
         if (player != null)
         {
