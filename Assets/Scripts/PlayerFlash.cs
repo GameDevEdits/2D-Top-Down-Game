@@ -6,6 +6,7 @@ public class PlayerFlash : MonoBehaviour
 {
     public float flashDuration = 0.1f;
     public Color flashColor = Color.red;
+    public AudioSource flashSound; // Reference to the AudioSource component
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -23,6 +24,10 @@ public class PlayerFlash : MonoBehaviour
         {
             // Handle the enemy being hit by a player bullet.
             StartCoroutine(FlashEnemy());
+            if (flashSound != null) // Check if the audio source is assigned
+            {
+                flashSound.Play(); // Play the sound
+            }
         }
     }
 

@@ -9,9 +9,10 @@ public class JackfruitAttack : MonoBehaviour
     public float checkRadius;
     public float attackRadius;
     public float avoidanceRadius;
-
+    public float startThrowRadius;
+    public float endThrowRadius;
+    public float shootInterval = 1f;
     public LayerMask whatIsPlayer;
-
     public GameObject bulletPrefab;
     public float bulletSpeed;
     public int bulletDamage;
@@ -24,14 +25,11 @@ public class JackfruitAttack : MonoBehaviour
 
     private bool isInChaseRange;
     private bool isInAttackRange;
+    private bool isAttacking;
+    private bool isThrowing;
 
     private float lastShotTime;
-    public float shootInterval = 1f;
-
-    private bool isAttacking;
-
     private float originalSpeed; // Store the original speed before freezing
-
 
     private void Start()
     {
@@ -50,6 +48,8 @@ public class JackfruitAttack : MonoBehaviour
     {
         isInChaseRange = Physics2D.OverlapCircle(transform.position, checkRadius, whatIsPlayer);
         isInAttackRange = Physics2D.OverlapCircle(transform.position, attackRadius, whatIsPlayer);
+        bool isInThrowRange = Physics2D.OverlapCircle(transform.position, startThrowRadius, whatIsPlayer) &&
+                              !Physics2D.OverlapCircle(transform.position, endThrowRadius, whatIsPlayer);
 
         dir = target.position - transform.position;
         dir.Normalize();
@@ -57,7 +57,17 @@ public class JackfruitAttack : MonoBehaviour
 
         AvoidOtherEnemies();
 
-        if (isInAttackRange)
+        if (isInThrowRange && !isThrowing)
+        {
+            isThrowing = true;
+            anim.SetBool("isThrowing", isThrowing);
+        }
+        else if (!isInThrowRange && isThrowing)
+        {
+            isThrowing = false;
+            anim.SetBool("isThrowing", isThrowing);
+        }
+        else if (isInAttackRange)
         {
             isAttacking = true;
         }
@@ -66,8 +76,7 @@ public class JackfruitAttack : MonoBehaviour
             isAttacking = false;
         }
 
-        anim.SetBool("isRunning", isInChaseRange && !isAttacking);
-
+        anim.SetBool("isRunning", isInChaseRange && !isAttacking && !isThrowing);
         anim.SetFloat("X", dir.x);
         anim.SetFloat("Y", dir.y);
         anim.SetBool("isAttacking", isAttacking);
@@ -75,11 +84,11 @@ public class JackfruitAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isInChaseRange && !isAttacking)
+        if (isInChaseRange && !isAttacking && !isThrowing)
         {
             MoveCharacter(movement);
         }
-        if (isInAttackRange)
+        else if (isInAttackRange && !isThrowing)
         {
             rb.velocity = Vector2.zero;
             Shoot();
@@ -133,6 +142,13 @@ public class JackfruitAttack : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, checkRadius);
+
+        // Draw start throw radius
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, startThrowRadius);
+
+        // Draw end throw radius
+        Gizmos.DrawWireSphere(transform.position, endThrowRadius);
     }
 
     private IEnumerator FreezeSpeed(float duration)
