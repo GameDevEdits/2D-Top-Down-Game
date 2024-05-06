@@ -365,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.05
   flashColor: {r: 1, g: 0, b: 0, a: 1}
+  textHolder: {fileID: 579572830012007754, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
 --- !u!114 &4712277252364624490
 MonoBehaviour:
   m_ObjectHideFlags: 0

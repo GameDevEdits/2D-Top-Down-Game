@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PopupDisplayer : MonoBehaviour
 {
-    public GameObject popupText;
-	public GameObject critPopupText;
+    public static GameObject popupText;
+	public static GameObject critPopupText;
 	
-	public void NoCrit()
+	public static void NoCrit()
 	{
 		popupText.SetActive(true);
 		critPopupText.SetActive(false);
 	}
 	
-	public void Crit()
+	public static void Crit()
 	{
 		popupText.SetActive(false);
 		critPopupText.SetActive(true);
