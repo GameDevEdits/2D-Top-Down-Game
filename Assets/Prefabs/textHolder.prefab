@@ -67,8 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f80482d7cc22841a8c979a1d17dcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupText: {fileID: 3916335621083441727, guid: 24092133bb591d34b928b32d478ee695, type: 3}
-  critPopupText: {fileID: 4899224571432323035, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
 --- !u!1001 &579572829942075956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80,6 +78,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d0f9ae903cb100547a98ba81cbd18e31, type: 2}
+    - target: {fileID: 452859697985839389, guid: 24092133bb591d34b928b32d478ee695, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2922335743291234045, guid: 24092133bb591d34b928b32d478ee695, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -164,6 +166,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3782538818747939976, guid: 24092133bb591d34b928b32d478ee695, type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782538818747939976, guid: 24092133bb591d34b928b32d478ee695, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782538818747939976, guid: 24092133bb591d34b928b32d478ee695, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916335621083441727, guid: 24092133bb591d34b928b32d478ee695, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3988710618815011046, guid: 24092133bb591d34b928b32d478ee695, type: 3}
       propertyPath: m_Name
       value: pfDamagePopup
@@ -210,6 +228,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 579572830012007749}
     m_Modifications:
+    - target: {fileID: 4899224571432323015, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899224571432323015, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4899224571432323015, guid: 867b76b7dd319ad44829003b801834dc, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4278190335

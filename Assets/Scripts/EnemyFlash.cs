@@ -21,10 +21,11 @@ public class EnemyFlash : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+		
         if (other.CompareTag("PlayerBullet"))
-        {	
+        {
 			//Create the damage number popup
-			textHolder = Instantiate(textHolder, this.transform);
+			Instantiate(textHolder, this.transform);
 			//I'll need some information on the damage system to create a distinction between the regular and critial popups
 			
             // Handle the enemy being hit by a player bullet.
