@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.05
   flashColor: {r: 1, g: 0, b: 0, a: 1}
+  textHolder: {fileID: 579572830012007754, guid: 032601fb17d247f4db0f5353c781a87f, type: 3}
 --- !u!114 &5004118565936025069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +246,7 @@ MonoBehaviour:
   pommeBlock: {fileID: 313721475091938288}
   chosenAudioSource: {fileID: -751682632751504238}
   blockCooldown: 1.5
+  knockbackFeedback: {fileID: 0}
 --- !u!114 &313721475091938288
 MonoBehaviour:
   m_ObjectHideFlags: 0
