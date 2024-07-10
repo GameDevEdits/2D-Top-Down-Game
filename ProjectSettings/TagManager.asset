@@ -20,6 +20,18 @@ TagManager:
   - Wall
   - Obstacle
   - DMGPopup
+  - ROD
+  - SShiv
+  - NukeS
+  - DirtyPenny
+  - Treeborn
+  - PeelParty
+  - Spice
+  - TrailMix
+  - EnemyPage
+  - BossPage
+  - PlayerPage
+  - MainPage
   layers:
   - Default
   - TransparentFX

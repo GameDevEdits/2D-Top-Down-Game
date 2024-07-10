@@ -9,11 +9,13 @@ public class PMovement2 : MonoBehaviour
     public float dashCooldown = 2f;
     public float interactRadius = 3f; // Adjust the radius in the inspector
     public LayerMask chestLayer; // Set this in the inspector to the layer where your chests are
+    public float playerDashCooldown = 3f; // Cooldown time for playerDash
 
     private float originalMoveSpeed;
     private float dashTimer;
     private bool isDashing;
     private float dashCooldownTimer;
+    private float playerDashCooldownTimer; // Timer for playerDash cooldown
 
     public Rigidbody2D rb;
     public Animator animator;
@@ -22,8 +24,11 @@ public class PMovement2 : MonoBehaviour
 
     private Vector2 rawInput;
     private Vector2 movement;
+    private Vector2 lastDirection;
 
     private bool isIdle = true;
+    public bool playerDash = false; // Track the second dash state
+    private bool isSlowed = false; // Track if player is slowed down
 
     void Start()
     {
@@ -32,8 +37,22 @@ public class PMovement2 : MonoBehaviour
 
     void Update()
     {
+        // Return early if playerDash or isRolling is true to ignore other inputs
+        if (playerDash || animator.GetBool("isRolling"))
+        {
+            movement = lastDirection;
+            moveSpeed = 15f; // Ensure speed is set correctly during dash or roll
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            return;
+        }
+
         rawInput.x = Input.GetAxisRaw("Horizontal");
         rawInput.y = Input.GetAxisRaw("Vertical");
+
+        if (rawInput != Vector2.zero)
+        {
+            lastDirection = rawInput.normalized;
+        }
 
         movement = rawInput.normalized;
 
@@ -45,6 +64,12 @@ public class PMovement2 : MonoBehaviour
         if (!GetComponent<PlayerHealth>().IsBlocking() && Input.GetKeyDown(KeyCode.Space) && !isDashing && dashCooldownTimer <= 0f)
         {
             StartDash();
+        }
+
+        // Check for the second dash only if not rolling
+        if (!animator.GetBool("isRolling") && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && playerDashCooldownTimer <= 0f)
+        {
+            StartSecondDash();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -76,6 +101,11 @@ public class PMovement2 : MonoBehaviour
             dashCooldownTimer -= Time.deltaTime;
         }
 
+        if (playerDashCooldownTimer > 0f)
+        {
+            playerDashCooldownTimer -= Time.deltaTime;
+        }
+
         // Set animator parameters for back idle
         bool isWKeyUp = Input.GetKeyUp(KeyCode.W);
         bool isAKeyUp = Input.GetKeyUp(KeyCode.A);
@@ -88,8 +118,25 @@ public class PMovement2 : MonoBehaviour
 
         // Check if the player is idle
         isIdle = Mathf.Approximately(movement.sqrMagnitude, 0f);
-    }
 
+        // Adjust player speed based on dashing, rolling, and slowed states
+        if (animator.GetBool("isRolling"))
+        {
+            moveSpeed = 15f;
+        }
+        else if (playerDash)
+        {
+            moveSpeed = 15f;
+        }
+        else if (isSlowed)
+        {
+            moveSpeed = 3f;
+        }
+        else
+        {
+            moveSpeed = originalMoveSpeed;
+        }
+    }
 
     void FixedUpdate()
     {
@@ -101,9 +148,10 @@ public class PMovement2 : MonoBehaviour
         // Check if the player is not blocking
         if (!GetComponent<PlayerHealth>().IsBlocking())
         {
-            moveSpeed *= dashMultiplier;
+            moveSpeed = 15f; // Set the speed to 15 for rolling
             dashTimer = dashDuration;
             isDashing = true;
+            animator.SetBool("isRolling", true);
         }
     }
 
@@ -112,6 +160,7 @@ public class PMovement2 : MonoBehaviour
         moveSpeed = originalMoveSpeed;
         isDashing = false;
         dashCooldownTimer = dashCooldown;
+        animator.SetBool("isRolling", false);
     }
 
     void PlayFootstepAudio()
@@ -208,11 +257,33 @@ public class PMovement2 : MonoBehaviour
 
     public void SlowM()
     {
+        isSlowed = true; // Set flag for slowed movement
         moveSpeed = 3f;
     }
 
     public void NormalM()
     {
-        moveSpeed = 6f;
+        isSlowed = false; // Clear flag for slowed movement
+        moveSpeed = originalMoveSpeed;
+    }
+
+    void StartSecondDash()
+    {
+        // Check if not rolling
+        if (!animator.GetBool("isRolling"))
+        {
+            playerDash = true;
+            animator.SetBool("playerDash", true);
+            moveSpeed = 15f;
+            playerDashCooldownTimer = playerDashCooldown; // Start the cooldown timer
+        }
+    }
+
+    // This method will be called by an animation event at the end of the dash animation
+    public void EndSecondDash()
+    {
+        playerDash = false;
+        animator.SetBool("playerDash", false);
+        moveSpeed = originalMoveSpeed;
     }
 }

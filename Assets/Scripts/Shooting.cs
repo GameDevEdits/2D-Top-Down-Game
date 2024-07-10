@@ -47,10 +47,12 @@ public class Shooting : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);
 
-        // Attach a script to the bullet to handle collisions
-        bullet.AddComponent<BulletCollisionHandler>();
-
-        // Don't destroy the bullet immediately, let the BulletController handle it.
+        // Assign the bulletTime to the BulletController
+        BulletController bulletController = bullet.GetComponent<BulletController>();
+        if (bulletController != null)
+        {
+            bulletController.bulletTime = bulletTime;
+        }
     }
 
     IEnumerator FireRateCooldown()
@@ -77,17 +79,36 @@ public class Shooting : MonoBehaviour
             Debug.LogWarning("AudioSource or AudioClip array is not assigned.");
         }
     }
-}
 
-public class BulletCollisionHandler : MonoBehaviour
-{
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the collided object has the tag "Shield"
-        if (other.CompareTag("Shield"))
+        // Check if the collided object has the tag "ROD"
+        if (other.CompareTag("ROD") && gameObject.CompareTag("Player"))
         {
-            // Destroy the bullet without dealing damage
-            Destroy(gameObject);
+            IncreaseFireRateAndCriticalHitChance();
+            // Optionally, destroy the ROD object or disable it
+            Destroy(other.gameObject);
+        }
+    }
+
+    void IncreaseFireRateAndCriticalHitChance()
+    {
+        // Increase the fire rate by 25%
+        fireRate *= 1.25f;
+        // Increase the critical hit chance by 10%
+        BulletController.IncreaseCriticalHitChance(0.1f);
+
+        // Update the whip animation speed
+        UpdateWhipAnimationSpeed();
+    }
+
+    void UpdateWhipAnimationSpeed()
+    {
+        // Find the GameObject with the WhipAnim script
+        WhipAnim whipAnim = FindObjectOfType<WhipAnim>();
+        if (whipAnim != null)
+        {
+            whipAnim.AdjustAnimationSpeed(fireRate);
         }
     }
 }

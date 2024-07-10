@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1896184241775017392}
   - component: {fileID: -3882059526865634421}
   - component: {fileID: 8348792615956580582}
+  - component: {fileID: -8714435767120242431}
   m_Layer: 0
   m_Name: EnemyOrangeHD
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 600
+  m_SortingOrder: 210
   m_Sprite: {fileID: 21300000, guid: e15ca632de09bf34bba0bd3d2aeaa394, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -116,3 +117,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthAmount: 100
   pickupSound: {fileID: 8300000, guid: 901f65e7a95048d44b46bfc28125eeb3, type: 3}
+--- !u!114 &-8714435767120242431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242009203777966477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba3fa95a319b20488f62064721f2e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  amplitude: 0.2

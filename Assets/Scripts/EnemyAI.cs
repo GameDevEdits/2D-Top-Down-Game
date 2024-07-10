@@ -16,7 +16,7 @@ public class EnemyAI : MonoBehaviour
 
     private Transform player;
     private Animator anim;
-    private bool isDead;
+    public bool isDead; // Make this public so it can be accessed by other scripts
 
     public ScoreManager scoreManager;
     public PlayerTimer playerTimer;
@@ -37,7 +37,6 @@ public class EnemyAI : MonoBehaviour
 
     public KnockbackFeedback knockbackFeedback;
 
-
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -46,7 +45,6 @@ public class EnemyAI : MonoBehaviour
 
         StartCoroutine(DelayVulnerability());
     }
-
 
     private void Update()
     {
@@ -91,7 +89,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         isDead = true;
 
@@ -186,11 +184,10 @@ public class EnemyAI : MonoBehaviour
             myScriptComponentEight.enabled = false;
         }
 
-
         // Spawn a health drop
         SpawnHealthDrop();
-		SpawnerEnablerScript.enemiesNeeded--;
-		Debug.Log("Enemies Remaining: "+SpawnerEnablerScript.enemiesNeeded);
+        SpawnerEnablerScript.enemiesNeeded--;
+        Debug.Log("Enemies Remaining: " + SpawnerEnablerScript.enemiesNeeded);
     }
 
     void StartAudioAgain()
@@ -220,7 +217,6 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-
 
     IEnumerator BlockCooldown()
     {

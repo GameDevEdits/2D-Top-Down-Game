@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletController : MonoBehaviour
 {
     public float speed = 10f;   // Bullet speed.
-    public int damage = 20; // Base damage dealt by the bullet.
-    public float criticalHitChance = 0.2f; // Chance for a critical hit (20%).
+    public int damage = 25; // Base damage dealt by the bullet.
+    public static float criticalHitChance = 0.2f; // Chance for a critical hit (20%).
+
+    public static int originalDamage = 25; // Static variable to store the original damage, initialized to 25.
 
     private Animator bulletAnimator;
     private Rigidbody2D rb;
@@ -14,6 +17,22 @@ public class BulletController : MonoBehaviour
 
     public float explodeAnimationDuration = 1.0f; // Adjust this value based on your animation duration.
     public float bulletTime = 0.09f; // Time until the bullet is destroyed
+
+    private void Awake()
+    {
+        // Ensure originalDamage is initialized correctly and persists across scene changes.
+        if (originalDamage == 0)
+        {
+            originalDamage = damage;
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the scene loaded event
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reset originalDamage when the scene is loaded (game restarts).
+        originalDamage = 25; // Set the original damage value explicitly if needed
+    }
 
     private void Start()
     {
@@ -178,5 +197,16 @@ public class BulletController : MonoBehaviour
             // Print a warning if "WhipImpactPosition" is not found.
             Debug.LogWarning("GameObject with name 'WhipImpactPosition' not found in the scene.");
         }
+    }
+
+    public static void IncreaseCriticalHitChance(float amount)
+    {
+        criticalHitChance += amount;
+    }
+
+    public static void ResetDamage()
+    {
+        // Reset damage to the original value
+        originalDamage = 25; // Set the original damage value explicitly if needed
     }
 }

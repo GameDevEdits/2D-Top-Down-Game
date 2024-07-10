@@ -11,7 +11,7 @@ public class ControlsDisplay : MonoBehaviour
 	void Update()
 	{
 		//Will make the controls appear on screen if left or right Shift is pressed while they aren't visible (visible by default)
-		if((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && !displayControls)
+		if((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)) && !displayControls)
 		{
 			displayControls = true;
 		}

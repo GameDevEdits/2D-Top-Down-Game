@@ -28,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
 
     private List<GameObject> uiElements = new List<GameObject>(); // List to store UI elements
 
+    private PMovement2 playerMovementScript;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -49,6 +51,9 @@ public class PlayerHealth : MonoBehaviour
 
         // Find and store all UI elements in the scene
         FindAndStoreUIElements();
+
+        // Get reference to PMovement2 script
+        playerMovementScript = GetComponent<PMovement2>();
     }
 
     private void Update()
@@ -59,8 +64,8 @@ public class PlayerHealth : MonoBehaviour
         // Check for user input to block
         if (Input.GetMouseButtonDown(1) && blockCooldownTimer <= 0.0f)
         {
-            // Check if the player is not currently rolling
-            if (!animator.GetBool("isRolling"))
+            // Check if the player is not currently rolling and playerDash is not active
+            if (!animator.GetBool("isRolling") && (playerMovementScript == null || !playerMovementScript.playerDash))
             {
                 StartBlocking();
             }
@@ -259,7 +264,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void StartBlocking()
     {
-        if (!isBlocking && blockCooldownTimer <= 0.0f)
+        if (!isBlocking && blockCooldownTimer <= 0.0f && (playerMovementScript == null || !playerMovementScript.playerDash))
         {
             // Set the flag to indicate that the player is blocking
             isBlocking = true;
