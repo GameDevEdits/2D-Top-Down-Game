@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 120060342169602152}
   - component: {fileID: 120060342169602153}
   - component: {fileID: 120060342169602158}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Dirty Penny
   m_TagString: DirtyPenny
   m_Icon: {fileID: 0}

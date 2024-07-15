@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6800588178387777768}
   - component: {fileID: 6800588178387777771}
   - component: {fileID: 6800588178387777770}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Treeborn
   m_TagString: Treeborn
   m_Icon: {fileID: 0}

@@ -321,6 +321,10 @@ MonoBehaviour:
     spawnChance: 0.05
   - itemPrefab: {fileID: 7690592021650131236, guid: 12de7437f50282342b343ffab4e3e59d, type: 3}
     spawnChance: 0.01
+  - itemPrefab: {fileID: 780059639654198101, guid: c8b580d289cab7a4e9e5eba783f9db5b, type: 3}
+    spawnChance: 0.05
+  - itemPrefab: {fileID: 6566558483809550630, guid: a032d38d01d4d1a4eb548631d64c6888, type: 3}
+    spawnChance: 0.05
   isDead: 0
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}
@@ -373,7 +377,10 @@ MonoBehaviour:
   bulletSpeed: 20
   bulletDamage: 100
   damageRadius: 4
+  damageRadius2: 3
   slashOffset: 0
+  damageRadiusOffset: {x: 0, y: 0}
+  damageRadiusOffset2: {x: 0, y: 0}
 --- !u!114 &4712277252364624487
 MonoBehaviour:
   m_ObjectHideFlags: 0

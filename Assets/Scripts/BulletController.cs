@@ -18,6 +18,8 @@ public class BulletController : MonoBehaviour
     public float explodeAnimationDuration = 1.0f; // Adjust this value based on your animation duration.
     public float bulletTime = 0.09f; // Time until the bullet is destroyed
 
+    public LayerMask enemyLayerMask; // Layer mask for the "Enemy" layer
+
     private void Awake()
     {
         // Ensure originalDamage is initialized correctly and persists across scene changes.
@@ -74,8 +76,8 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        // Check if the bullet has hit an enemy.
-        if (other.CompareTag("Enemy") && !hasHitEnemy)
+        // Check if the bullet has hit an enemy using the layer mask.
+        if (((1 << other.gameObject.layer) & enemyLayerMask) != 0 && !hasHitEnemy)
         {
             // Get the EnemyAI component from the enemy.
             EnemyAI enemy = other.GetComponent<EnemyAI>();

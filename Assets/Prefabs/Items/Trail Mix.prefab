@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8900400642533086286}
   - component: {fileID: 1101226091269195177}
   - component: {fileID: 8900400642533086285}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Trail Mix
   m_TagString: TrailMix
   m_Icon: {fileID: 0}

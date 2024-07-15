@@ -8,6 +8,7 @@ public class AffectedArchwayController : MonoBehaviour
     public float activationRadius = 5.0f;
 
     private bool wavesCompleted = false;
+    private bool isArchwayOpen = false; // Instance variable to track archway state
 
     public void SetWavesCompleted(bool completed)
     {
@@ -16,28 +17,34 @@ public class AffectedArchwayController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(playerTag) && wavesCompleted)
+        if (other.CompareTag(playerTag) && wavesCompleted && !isArchwayOpen)
         {
             if (animator != null)
             {
                 animator.SetBool("openArchway", true);
+                isArchwayOpen = true; // Mark this instance as open
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag(playerTag))
+        if (other.CompareTag(playerTag) && isArchwayOpen)
         {
             if (animator != null)
             {
                 animator.SetBool("openArchway", false);
+                isArchwayOpen = false; // Mark this instance as closed
             }
         }
     }
 
     public void OpenArchway()
     {
-        animator.SetBool("openArchway", true);
+        if (!isArchwayOpen)
+        {
+            animator.SetBool("openArchway", true);
+            isArchwayOpen = true; // Mark this instance as open
+        }
     }
 }

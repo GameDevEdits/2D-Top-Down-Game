@@ -256,6 +256,8 @@ MonoBehaviour:
     spawnChance: 0.05
   - itemPrefab: {fileID: 7690592021650131236, guid: 12de7437f50282342b343ffab4e3e59d, type: 3}
     spawnChance: 0.01
+  - itemPrefab: {fileID: 780059639654198101, guid: c8b580d289cab7a4e9e5eba783f9db5b, type: 3}
+    spawnChance: 0.05
   isDead: 0
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}

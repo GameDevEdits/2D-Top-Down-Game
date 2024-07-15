@@ -66,8 +66,8 @@ public class PMovement2 : MonoBehaviour
             StartDash();
         }
 
-        // Check for the second dash only if not rolling
-        if (!animator.GetBool("isRolling") && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && playerDashCooldownTimer <= 0f)
+        // Check for the second dash only if not rolling, speed is greater than 0, and in movement state
+        if (!animator.GetBool("isRolling") && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && playerDashCooldownTimer <= 0f && IsInMovementState() && movement.sqrMagnitude > 0)
         {
             StartSecondDash();
         }
@@ -105,16 +105,6 @@ public class PMovement2 : MonoBehaviour
         {
             playerDashCooldownTimer -= Time.deltaTime;
         }
-
-        // Set animator parameters for back idle
-        bool isWKeyUp = Input.GetKeyUp(KeyCode.W);
-        bool isAKeyUp = Input.GetKeyUp(KeyCode.A);
-        bool isDKeyUp = Input.GetKeyUp(KeyCode.D);
-        bool isSKeyUp = Input.GetKeyUp(KeyCode.S);
-
-        animator.SetBool("backIdleLeft", isWKeyUp && (isAKeyUp || Input.GetKeyUp(KeyCode.S)));
-        animator.SetBool("backIdleRight", isWKeyUp && isDKeyUp);
-        animator.SetBool("rightIdle", isSKeyUp);
 
         // Check if the player is idle
         isIdle = Mathf.Approximately(movement.sqrMagnitude, 0f);
@@ -161,6 +151,34 @@ public class PMovement2 : MonoBehaviour
         isDashing = false;
         dashCooldownTimer = dashCooldown;
         animator.SetBool("isRolling", false);
+
+        // Reset movement vector and update animator
+        movement = Vector2.zero;
+        UpdateAnimatorParameters();
+    }
+
+    void StartSecondDash()
+    {
+        // Check if not rolling and the player is in movement state
+        if (!animator.GetBool("isRolling") && IsInMovementState())
+        {
+            playerDash = true;
+            animator.SetBool("playerDash", true);
+            moveSpeed = 15f;
+            playerDashCooldownTimer = playerDashCooldown; // Start the cooldown timer
+            dashTimer = playerDashCooldown; // Use dashTimer to control the duration
+        }
+    }
+
+    void EndSecondDash()
+    {
+        playerDash = false;
+        animator.SetBool("playerDash", false);
+        moveSpeed = originalMoveSpeed;
+
+        // Reset movement vector and update animator
+        movement = Vector2.zero;
+        UpdateAnimatorParameters();
     }
 
     void PlayFootstepAudio()
@@ -267,23 +285,18 @@ public class PMovement2 : MonoBehaviour
         moveSpeed = originalMoveSpeed;
     }
 
-    void StartSecondDash()
+    // New method to update animator parameters
+    void UpdateAnimatorParameters()
     {
-        // Check if not rolling
-        if (!animator.GetBool("isRolling"))
-        {
-            playerDash = true;
-            animator.SetBool("playerDash", true);
-            moveSpeed = 15f;
-            playerDashCooldownTimer = playerDashCooldown; // Start the cooldown timer
-        }
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     // This method will be called by an animation event at the end of the dash animation
-    public void EndSecondDash()
+    bool IsInMovementState()
     {
-        playerDash = false;
-        animator.SetBool("playerDash", false);
-        moveSpeed = originalMoveSpeed;
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); // Assuming layer 0 for movement blend tree
+        return stateInfo.IsTag("Movement"); // Use tags to identify movement states
     }
 }

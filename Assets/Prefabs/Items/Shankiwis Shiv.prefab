@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6566558483809550631}
   - component: {fileID: 6566558483809550627}
   - component: {fileID: 6566558483809550636}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Shankiwis Shiv
   m_TagString: SShiv
   m_Icon: {fileID: 0}

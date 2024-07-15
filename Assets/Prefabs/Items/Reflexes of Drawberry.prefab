@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3715822270558285754}
   - component: {fileID: 3715822270558285759}
   - component: {fileID: 3715822270558285758}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Reflexes of Drawberry
   m_TagString: ROD
   m_Icon: {fileID: 0}

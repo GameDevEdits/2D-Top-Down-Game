@@ -32,6 +32,7 @@ TagManager:
   - BossPage
   - PlayerPage
   - MainPage
+  - ContactDmgEnemy
   layers:
   - Default
   - TransparentFX
@@ -49,7 +50,7 @@ TagManager:
   - Mimic
   - InvincibleBullet
   - Obstacle
-  - 
+  - Items
   - 
   - 
   - 

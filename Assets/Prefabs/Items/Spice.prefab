@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 780059639654198057}
   - component: {fileID: 780059639654198058}
   - component: {fileID: 780059639654198059}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Spice
   m_TagString: Spice
   m_Icon: {fileID: 0}

@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 8167278511083207337}
   - component: {fileID: 7996290712636741752}
   - component: {fileID: 8004537817901572791}
+  - component: {fileID: 6060377167204073022}
   m_Layer: 6
   m_Name: Shuriken Starfruit
   m_TagString: Enemy
@@ -305,6 +306,8 @@ MonoBehaviour:
     spawnChance: 0.05
   - itemPrefab: {fileID: 7690592021650131236, guid: 12de7437f50282342b343ffab4e3e59d, type: 3}
     spawnChance: 0.01
+  - itemPrefab: {fileID: 780059639654198101, guid: c8b580d289cab7a4e9e5eba783f9db5b, type: 3}
+    spawnChance: 0.05
   isDead: 0
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}
@@ -846,6 +849,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6060377167204073022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495322888742656036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2c46ddc1401a84e94d59e2cc195f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.6
+  damageAmount: 50
+  damageCooldown: 1
+  offset: {x: -1.4, y: 0}
 --- !u!1 &7495322888978452938
 GameObject:
   m_ObjectHideFlags: 0

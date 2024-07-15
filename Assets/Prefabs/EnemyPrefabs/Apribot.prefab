@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 4563892749304241421}
   - component: {fileID: 7477874156141348378}
   - component: {fileID: 1517510161614895443}
+  - component: {fileID: 4536154083766697490}
   m_Layer: 6
   m_Name: Apribot
   m_TagString: Enemy
@@ -469,6 +470,8 @@ MonoBehaviour:
     spawnChance: 0.05
   - itemPrefab: {fileID: 7690592021650131236, guid: 12de7437f50282342b343ffab4e3e59d, type: 3}
     spawnChance: 0.01
+  - itemPrefab: {fileID: 780059639654198101, guid: c8b580d289cab7a4e9e5eba783f9db5b, type: 3}
+    spawnChance: 0.05
   isDead: 0
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}
@@ -1033,6 +1036,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4536154083766697490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431770395444286301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2c46ddc1401a84e94d59e2cc195f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.8
+  damageAmount: 100
+  damageCooldown: 1
+  offset: {x: 0, y: 0}
 --- !u!1 &6431770396142778874
 GameObject:
   m_ObjectHideFlags: 0

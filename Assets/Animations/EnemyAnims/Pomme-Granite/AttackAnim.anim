@@ -101,6 +101,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: FreezePosition
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.41666666
     functionName: DamageShoot
     data: 
@@ -117,6 +124,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.5
     functionName: SetIsAttackingFalse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: UnfreezePosition
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

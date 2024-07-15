@@ -4,26 +4,38 @@ using UnityEngine;
 public class DumbellDownSlam : MonoBehaviour
 {
     public GameObject prefabToSpawn; // Assign the prefab in the Unity Editor
-    public Transform spawnPoint; // Assign the spawn point transform in the Unity Editor
     public float delayBeforeImpact = 2f; // Delay before setting Impact parameter to true
+    public float spawnHeight = 20f; // Height above the player where the dumbell will spawn
 
     // This method will be called by an animation event
     public void SpawnDumbellDown()
     {
-        if (prefabToSpawn != null && spawnPoint != null)
+        if (prefabToSpawn != null)
         {
-            // Spawn the prefab at the spawn point
-            GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+            // Find the player object by tag
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                // Calculate the spawn position
+                Vector3 spawnPosition = player.transform.position + Vector3.up * spawnHeight;
 
-            // Get the DumbellController component from the spawned object
-            DumbellController dumbellController = spawnedObject.GetComponent<DumbellController>();
+                // Spawn the prefab at the calculated position
+                GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
 
-            // Start the impact delay coroutine for the spawned object
-            StartCoroutine(ImpactDelay(dumbellController));
+                // Get the DumbellController component from the spawned object
+                DumbellController dumbellController = spawnedObject.GetComponent<DumbellController>();
+
+                // Start the impact delay coroutine for the spawned object
+                StartCoroutine(ImpactDelay(dumbellController));
+            }
+            else
+            {
+                Debug.LogError("Player object not found!");
+            }
         }
         else
         {
-            Debug.LogError("Prefab or Spawn Point not assigned!");
+            Debug.LogError("Prefab not assigned!");
         }
     }
 

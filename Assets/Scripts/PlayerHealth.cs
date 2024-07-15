@@ -5,6 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using TMPro; // Import TextMeshPro namespace
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class PlayerHealth : MonoBehaviour
 
     private PMovement2 playerMovementScript;
 
+    public TMP_Text invincibilityText; // Public reference to the TextMeshPro object
+
+    private bool isInvincible = false; // Flag to track invincibility state
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -54,12 +59,24 @@ public class PlayerHealth : MonoBehaviour
 
         // Get reference to PMovement2 script
         playerMovementScript = GetComponent<PMovement2>();
+
+        // Initially, invincibility text should be disabled
+        if (invincibilityText != null)
+        {
+            invincibilityText.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
         // Update cooldown timer
         blockCooldownTimer -= Time.deltaTime;
+
+        // Check for user input to toggle invincibility
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ToggleInvincibility();
+        }
 
         // Check for user input to block
         if (Input.GetMouseButtonDown(1) && blockCooldownTimer <= 0.0f)
@@ -98,7 +115,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!isDead && currentHealth > 0 && canTakeDamage)
+        if (!isDead && currentHealth > 0 && canTakeDamage && !isInvincible)
         {
             // Check if the damage taken will result in reaching a multiple of 50 or 100
             int previousHealth = currentHealth;
@@ -333,5 +350,17 @@ public class PlayerHealth : MonoBehaviour
     {
         // Resume taking damage after rolling animation finishes
         canTakeDamage = true;
+    }
+
+    // Method to toggle invincibility
+    private void ToggleInvincibility()
+    {
+        isInvincible = !isInvincible; // Toggle invincibility
+
+        // Enable or disable the invincibility text object
+        if (invincibilityText != null)
+        {
+            invincibilityText.gameObject.SetActive(isInvincible); // Show text when invincible
+        }
     }
 }

@@ -8,8 +8,11 @@ public class NewEnemyMADShank : MonoBehaviour
     public GameObject slashPrefab; // Add reference to your slash prefab
     public float bulletSpeed = 10f;
     public int bulletDamage = 10;
-    public float damageRadius = 5f; // Set the desired damage radius.
+    public float damageRadius = 5f; // Set the desired damage radius for the first circle
+    public float damageRadius2 = 3f; // Set the desired damage radius for the second circle
     public float slashOffset = 1f; // Offset for spawning the slash above the player
+    public Vector2 damageRadiusOffset; // Offset for the damage radius of the first circle on the X and Y axis
+    public Vector2 damageRadiusOffset2; // Offset for the damage radius of the second circle on the X and Y axis
 
     private GameObject player;
     private Vector3 shootingDirection;
@@ -17,7 +20,7 @@ public class NewEnemyMADShank : MonoBehaviour
     // Function to be called as an Animation Event to spawn the slash
     public void SlashVFX()
     {
-        // Ensure the slashPrefab is set and the player is within the damage radius
+        // Ensure the slashPrefab is set and the player is within any damage radius
         if (slashPrefab == null || !IsPlayerWithinDamageRadius())
         {
             return;
@@ -39,7 +42,7 @@ public class NewEnemyMADShank : MonoBehaviour
     // Function to be called as an Animation Event to shoot the bullet and apply damage
     public void DamageShoot()
     {
-        // Ensure the bulletPrefab is set and the player is within the damage radius
+        // Ensure the bulletPrefab is set and the player is within any damage radius
         if (bulletPrefab == null || !IsPlayerWithinDamageRadius())
         {
             return;
@@ -80,7 +83,7 @@ public class NewEnemyMADShank : MonoBehaviour
         }
     }
 
-    // Check if the player is within the damage radius
+    // Check if the player is within any damage radius
     public bool IsPlayerWithinDamageRadius()
     {
         if (player == null)
@@ -90,7 +93,13 @@ public class NewEnemyMADShank : MonoBehaviour
 
         if (player != null)
         {
-            return Vector3.Distance(transform.position, player.transform.position) <= damageRadius;
+            Vector3 damageRadiusCenter1 = transform.position + (Vector3)damageRadiusOffset;
+            Vector3 damageRadiusCenter2 = transform.position + (Vector3)damageRadiusOffset2;
+
+            float distanceToPlayer1 = Vector3.Distance(damageRadiusCenter1, player.transform.position);
+            float distanceToPlayer2 = Vector3.Distance(damageRadiusCenter2, player.transform.position);
+
+            return distanceToPlayer1 <= damageRadius || distanceToPlayer2 <= damageRadius2;
         }
 
         return false;
@@ -105,5 +114,19 @@ public class NewEnemyMADShank : MonoBehaviour
             scale.x = flip ? -1f : 1f; // Flip if true, keep normal if false
             slashPrefab.transform.localScale = scale;
         }
+    }
+
+    // Draw the damage radius in the scene view
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        // Draw the first damage radius circle
+        Vector3 damageRadiusCenter1 = transform.position + (Vector3)damageRadiusOffset;
+        Gizmos.DrawWireSphere(damageRadiusCenter1, damageRadius);
+
+        // Draw the second damage radius circle
+        Vector3 damageRadiusCenter2 = transform.position + (Vector3)damageRadiusOffset2;
+        Gizmos.DrawWireSphere(damageRadiusCenter2, damageRadius2);
     }
 }

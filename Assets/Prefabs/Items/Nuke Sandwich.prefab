@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7690592021650131233}
   - component: {fileID: 7690592021650131234}
   - component: {fileID: 7690592021650131230}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Nuke Sandwich
   m_TagString: NukeS
   m_Icon: {fileID: 0}

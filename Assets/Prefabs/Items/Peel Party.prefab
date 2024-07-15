@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2346704743537252535}
   - component: {fileID: 2346704743537252534}
   - component: {fileID: 2346704743537252533}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Peel Party
   m_TagString: PeelParty
   m_Icon: {fileID: 0}

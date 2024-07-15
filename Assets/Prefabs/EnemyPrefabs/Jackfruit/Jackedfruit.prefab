@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 3564588692898538123}
   - component: {fileID: 3564588692898538131}
   - component: {fileID: 3564588692898538139}
+  - component: {fileID: 2838728906086723212}
   - component: {fileID: 3677582129404646161}
   - component: {fileID: 4373644015148018604}
   - component: {fileID: 4167628847777637711}
@@ -232,9 +233,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0348409, y: -0.22699356}
+  m_Offset: {x: -0.034840755, y: -2.1650252}
   serializedVersion: 2
-  m_Radius: 4.0264573
+  m_Radius: 2.088426
 --- !u!95 &3564588692898538123
 Animator:
   serializedVersion: 4
@@ -269,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.05
   flashColor: {r: 1, g: 0, b: 0, a: 1}
+  textHolder: {fileID: 0}
 --- !u!114 &3564588692898538139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +290,9 @@ MonoBehaviour:
   healthDrops:
   - itemPrefab: {fileID: 5242009203777966477, guid: 9bd18255eb1fcdc49aff9aec83b61a23, type: 3}
     spawnChance: 1
+  - itemPrefab: {fileID: 4676730944838389029, guid: 2d8e1f03b04d0b943954b822c6226a5f, type: 3}
+    spawnChance: 1
+  isDead: 0
   scoreManager: {fileID: 0}
   playerTimer: {fileID: 0}
   scoreText: {fileID: 0}
@@ -298,6 +303,20 @@ MonoBehaviour:
   chosenAudioSource: {fileID: 7944603297386206973}
   blockCooldown: 1
   knockbackFeedback: {fileID: 0}
+--- !u!114 &2838728906086723212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3564588692898538132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7edc114540763b841bf7eeba099a1188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 50
+  cooldownTime: 1
 --- !u!114 &3677582129404646161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,8 +371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 5893152100936917323, guid: ff172f2b2f1b9eb41a2b4235f45706e1, type: 3}
-  spawnPoint: {fileID: 0}
   delayBeforeImpact: 2
+  spawnHeight: 19.5
 --- !u!114 &3564588692898538142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,8 +389,11 @@ MonoBehaviour:
   slashPrefab: {fileID: 0}
   bulletSpeed: 20
   bulletDamage: 100
-  damageRadius: 4
+  damageRadius: 1.82
+  damageRadius2: 1.82
   slashOffset: 0
+  damageRadiusOffset: {x: 2.17, y: -1.64}
+  damageRadiusOffset2: {x: -2.17, y: -1.64}
 --- !u!114 &3564588692898538134
 MonoBehaviour:
   m_ObjectHideFlags: 0
