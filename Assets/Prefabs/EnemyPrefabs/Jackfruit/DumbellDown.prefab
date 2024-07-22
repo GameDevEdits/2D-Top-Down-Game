@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   impactDelay: 2
+  shadowPrefab: {fileID: 4307156254698887656, guid: 2f2cc903c964527459edc00164b08a1e, type: 3}
 --- !u!114 &6572589566478012883
 MonoBehaviour:
   m_ObjectHideFlags: 0

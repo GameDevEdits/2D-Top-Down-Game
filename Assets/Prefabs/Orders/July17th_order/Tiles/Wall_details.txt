@@ -1,0 +1,4 @@
+Use "cracked wall" to indicate a breakable wall (also can be used for Cantalost to be in)
+
+the entrance to a cracked wall tunnel should be "Tunnel1" then "tunnel2" should be used to
+pad out the tunnel length, the tunnel should then end in a flipped "Tunnel1"

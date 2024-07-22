@@ -9,10 +9,12 @@ public class FlipEnemyAI : MonoBehaviour
     private Transform playerTransform;
     private bool canFlip = false;
     private float delayTimer = 2f;
+    private StarfruitDmgOnDeath starfruitDmgOnDeath;
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        starfruitDmgOnDeath = GetComponent<StarfruitDmgOnDeath>();
         StartCoroutine(EnableFlipping());
     }
 
@@ -39,5 +41,10 @@ public class FlipEnemyAI : MonoBehaviour
         }
 
         transform.localScale = scale;
+
+        if (starfruitDmgOnDeath != null)
+        {
+            starfruitDmgOnDeath.SetFlipped(scale.x < 0);
+        }
     }
 }

@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 7495322888742656035}
   - component: {fileID: 7495322888742656043}
   - component: {fileID: 5718320881261408400}
+  - component: {fileID: 6891569964749429903}
   - component: {fileID: 7495322888742656038}
   - component: {fileID: 7495322888742656042}
   - component: {fileID: 4451507857655690889}
@@ -62,7 +63,7 @@ GameObject:
   - component: {fileID: 8167278511083207337}
   - component: {fileID: 7996290712636741752}
   - component: {fileID: 8004537817901572791}
-  - component: {fileID: 6060377167204073022}
+  - component: {fileID: 1074334816864504599}
   m_Layer: 6
   m_Name: Shuriken Starfruit
   m_TagString: Enemy
@@ -339,6 +340,104 @@ MonoBehaviour:
   dashSpeedMultiplier: 2
   dashDamage: 50
   maxDamagePerCycle: 200
+  destroyCheckRadius: 2
+  shreddingAudioSource: {fileID: 6891569964749429903}
+--- !u!82 &6891569964749429903
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495322888742656036}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6d56da9cf4640894f88c0882879e74b0, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &7495322888742656038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,7 +755,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 22bd62b519530b24382541f23b8c45ff, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -765,7 +864,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 471d6dde9cee45f4a83c47dba1b234b8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -849,7 +948,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6060377167204073022
+--- !u!114 &1074334816864504599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -858,13 +957,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7495322888742656036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf2c46ddc1401a84e94d59e2cc195f2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 52f0f72c010c3104f863aa9a3a14068a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.6
+  radius1: 1.3
+  radius2: 1.31
   damageAmount: 50
   damageCooldown: 1
-  offset: {x: -1.4, y: 0}
+  offset1: {x: -1.38, y: 0}
+  offset2: {x: 1.39, y: 0}
 --- !u!1 &7495322888978452938
 GameObject:
   m_ObjectHideFlags: 0

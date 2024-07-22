@@ -818,9 +818,6 @@ AnimatorStateTransition:
     m_ConditionEvent: chestOpening
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: backIdleRight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
     m_ConditionEvent: isDead
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -1029,9 +1026,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: chestOpening
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: backIdleLeft
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isDead
@@ -1433,6 +1427,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-875547922183388230
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: isRevived
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 317781275501400002}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-581199037829412254
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1554,6 +1573,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-70721146854320043
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RevivalAnimation
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -875547922183388230}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 27cf4a82a94563144ae16707d92bf4e5, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -1666,6 +1712,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: playerDash
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: isRevived
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1878,6 +1930,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &2534476088037434451
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isRevived
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -70721146854320043}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &2864551961925564854
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1997,9 +2074,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: chestOpening
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: rightIdle
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isDead
@@ -2326,28 +2400,28 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3596002888865529857}
-    m_Position: {x: -160, y: 1820, z: 0}
+    m_Position: {x: 0, y: 2110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5066794365321933411}
-    m_Position: {x: -1020, y: 440, z: 0}
+    m_Position: {x: -1190, y: 590, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 317781275501400002}
-    m_Position: {x: -530, y: 240, z: 0}
+    m_Position: {x: -230, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8152249900198399362}
-    m_Position: {x: -1250, y: 710, z: 0}
+    m_Position: {x: -1590, y: 950, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6838711440558579920}
-    m_Position: {x: -1200, y: 1530, z: 0}
+    m_Position: {x: -1360, y: 1790, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6779811761018301938}
-    m_Position: {x: 350, y: 680, z: 0}
+    m_Position: {x: 610, y: 840, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3107211651816075149}
-    m_Position: {x: 370, y: 1500, z: 0}
+    m_Position: {x: 600, y: 1630, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5880917054251126661}
-    m_Position: {x: -790, y: 1810, z: 0}
+    m_Position: {x: -900, y: 2150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2114786388391238669}
     m_Position: {x: 2620, y: 300, z: 0}
@@ -2356,13 +2430,16 @@ AnimatorStateMachine:
     m_Position: {x: 2670, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6172737013047346890}
-    m_Position: {x: 480, y: 1150, z: 0}
+    m_Position: {x: 630, y: 1270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4121521477724551969}
-    m_Position: {x: 50, y: 370, z: 0}
+    m_Position: {x: 400, y: 500, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5903557697817485479}
-    m_Position: {x: -1410, y: 1200, z: 0}
+    m_Position: {x: -1670, y: 1490, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -70721146854320043}
+    m_Position: {x: -960, y: 270, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -2383,7 +2460,8 @@ AnimatorState:
   m_Name: OrangeDeath
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 2534476088037434451}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -2632,9 +2710,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: chestOpening
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: rightIdle
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isDead

@@ -1,0 +1,4 @@
+1-6 coreloop
+7-11 footstomp loop
+12-13 laugh loop
+14-20 finishing frames

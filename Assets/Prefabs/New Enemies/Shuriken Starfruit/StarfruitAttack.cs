@@ -11,6 +11,8 @@ public class StarfruitAttack : MonoBehaviour
     public float dashSpeedMultiplier = 2f;
     public int dashDamage = 50; // Damage per dash
     public int maxDamagePerCycle = 50; // Maximum damage per attack animation cycle
+    public float destroyCheckRadius = 3f; // Radius to check for destroyable objects
+    public AudioSource shreddingAudioSource; // Audio source for the shredding sound effect
 
     private Transform target;
     private Animator anim;
@@ -19,6 +21,7 @@ public class StarfruitAttack : MonoBehaviour
     private bool isAttacking;
     private bool isDashing;
     private bool hasDamagedPlayerThisCycle; // Flag to track if the player has already been damaged during the current cycle
+    private bool enableCircle; // Flag to control the enable/disable state of the detection circle
 
     private void Start()
     {
@@ -46,6 +49,12 @@ public class StarfruitAttack : MonoBehaviour
 
                 // Reset damage flag at the start of each attack animation cycle
                 hasDamagedPlayerThisCycle = false;
+
+                // Check for destroyable objects if the circle is enabled
+                if (enableCircle)
+                {
+                    CheckForDestroyableObjects();
+                }
             }
             else
             {
@@ -134,6 +143,55 @@ public class StarfruitAttack : MonoBehaviour
         }
     }
 
+    private void CheckForDestroyableObjects()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, destroyCheckRadius, LayerMask.GetMask("Environment"));
+
+        foreach (Collider2D collider in colliders)
+        {
+            RassBushDestroy bushDestroyScript = collider.GetComponent<RassBushDestroy>();
+            DestroyGrass grassDestroyScript = collider.GetComponent<DestroyGrass>();
+
+            if (bushDestroyScript != null && !bushDestroyScript.bushDestroy)
+            {
+                Animator otherAnimator = collider.GetComponent<Animator>();
+                if (otherAnimator != null && !otherAnimator.GetBool("bushDestroy"))
+                {
+                    otherAnimator.SetBool("bushDestroy", true);
+                    PlayShreddingSound();
+                }
+            }
+
+            if (grassDestroyScript != null && !grassDestroyScript.bushDestroy)
+            {
+                Animator otherAnimator = collider.GetComponent<Animator>();
+                if (otherAnimator != null && !otherAnimator.GetBool("bushDestroy"))
+                {
+                    otherAnimator.SetBool("bushDestroy", true);
+                    PlayShreddingSound();
+                }
+            }
+        }
+    }
+
+    private void PlayShreddingSound()
+    {
+        if (shreddingAudioSource != null && !shreddingAudioSource.isPlaying)
+        {
+            shreddingAudioSource.Play();
+        }
+    }
+
+    public void EnableCircle()
+    {
+        enableCircle = true;
+    }
+
+    public void DisableCircle()
+    {
+        enableCircle = false;
+    }
+
     private IEnumerator FreezePosition(float duration)
     {
         rb.constraints = RigidbodyConstraints2D.FreezePosition;
@@ -151,6 +209,9 @@ public class StarfruitAttack : MonoBehaviour
 
         // Draw damage radius
         DrawRadius(damageRadius, Color.yellow);
+
+        // Draw destroy check radius
+        DrawRadius(destroyCheckRadius, Color.green);
     }
 
     private void DrawRadius(float radius, Color color)

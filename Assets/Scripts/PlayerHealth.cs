@@ -1,11 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using TMPro; // Import TextMeshPro namespace
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     private bool isDead = false;
     private Animator animator;
 
-    public float blockCooldown = 2.0f;  // Set your desired cooldown time
+    public float blockCooldown = 2.0f;
     private float blockCooldownTimer = 0.0f;
     private bool isBlocking = false;
 
@@ -25,15 +24,22 @@ public class PlayerHealth : MonoBehaviour
     private ColorAdjustments colorAdjustments;
     public float desaturationDuration = 3.0f;
 
-    public GameObject enemySpawner; // Reference to the EnemySpawner GameObject
+    public GameObject enemySpawner;
 
-    private List<GameObject> uiElements = new List<GameObject>(); // List to store UI elements
+    private List<GameObject> uiElements = new List<GameObject>();
 
     private PMovement2 playerMovementScript;
 
-    public TMP_Text invincibilityText; // Public reference to the TextMeshPro object
+    public TMP_Text invincibilityText;
 
-    private bool isInvincible = false; // Flag to track invincibility state
+    private bool isInvincible = false;
+    private bool isRevived = false;
+
+    private int revivalChance = 0; // Initial chance of revival
+
+    // New public field for the icon
+    public GameObject healthIcon;
+    private Animator healthIconAnimator;
 
     private void Start()
     {
@@ -43,7 +49,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (globalVolume != null && globalVolume.profile.TryGet(out colorAdjustments))
         {
-            // Disable desaturation at the start
             colorAdjustments.saturation.value = 100.0f;
         }
         else
@@ -51,50 +56,47 @@ public class PlayerHealth : MonoBehaviour
             Debug.LogError("Volume or ColorAdjustments settings not found on the 'Global Volume' GameObject.");
         }
 
-        // Initialize cooldown timer
         blockCooldownTimer = 0.0f;
-
-        // Find and store all UI elements in the scene
         FindAndStoreUIElements();
-
-        // Get reference to PMovement2 script
         playerMovementScript = GetComponent<PMovement2>();
 
-        // Initially, invincibility text should be disabled
         if (invincibilityText != null)
         {
             invincibilityText.gameObject.SetActive(false);
+        }
+
+        // Initialize the health icon animator
+        if (healthIcon != null)
+        {
+            healthIconAnimator = healthIcon.GetComponent<Animator>();
         }
     }
 
     private void Update()
     {
-        // Update cooldown timer
         blockCooldownTimer -= Time.deltaTime;
 
-        // Check for user input to toggle invincibility
         if (Input.GetKeyDown(KeyCode.Q))
         {
             ToggleInvincibility();
         }
 
-        // Check for user input to block
         if (Input.GetMouseButtonDown(1) && blockCooldownTimer <= 0.0f)
         {
-            // Check if the player is not currently rolling and playerDash is not active
             if (!animator.GetBool("isRolling") && (playerMovementScript == null || !playerMovementScript.playerDash))
             {
                 StartBlocking();
             }
         }
+
+        // Update health icon based on current health
+        UpdateHealthIcon();
     }
 
     private void FindAndStoreUIElements()
     {
-        // Find all game objects with the tag "UI"
         GameObject[] uiObjects = GameObject.FindGameObjectsWithTag("UI");
 
-        // Add UI elements to the list
         foreach (GameObject uiObject in uiObjects)
         {
             uiElements.Add(uiObject);
@@ -103,7 +105,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void DisableUI()
     {
-        // Disable all UI elements in the list
         foreach (GameObject uiElement in uiElements)
         {
             if (uiElement != null)
@@ -115,36 +116,23 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!isDead && currentHealth > 0 && canTakeDamage && !isInvincible)
+        if (!isDead && currentHealth > 0 && canTakeDamage && !isInvincible && !isRevived)
         {
-            // Check if the damage taken will result in reaching a multiple of 50 or 100
             int previousHealth = currentHealth;
             currentHealth -= damage;
             int newHealth = currentHealth;
 
-            if (((previousHealth - 1) / 50 != (newHealth - 1) / 50) || ((previousHealth - 1) / 100 != (newHealth - 1) / 100)) // If health crosses a 50 or 100-multiple boundary
+            if (((previousHealth - 1) / 50 != (newHealth - 1) / 50) || ((previousHealth - 1) / 100 != (newHealth - 1) / 100))
             {
-                // Stop taking damage for 1 second
                 StartCoroutine(StopTakingDamageForOneSecond());
             }
 
             hasTakenDamage = true;
-
-            // Start the damage cooldown coroutine only when actual damage is taken
             StartCoroutine(DamageCooldownCoroutine());
 
-            // Check if the player has been defeated
             if (currentHealth <= 0)
             {
                 Die();
-                FreezeAllEnemies();
-                StartCoroutine(DesaturateSceneCoroutine());
-
-                // Disable the enemy spawner
-                if (enemySpawner != null)
-                {
-                    enemySpawner.SetActive(false);
-                }
             }
         }
     }
@@ -153,7 +141,6 @@ public class PlayerHealth : MonoBehaviour
     {
         canTakeDamage = true;
         yield return new WaitForSeconds(0.5f);
-        // Start the cooldown only when damage is taken
         canTakeDamage = false;
         hasTakenDamage = true;
         yield return new WaitForSeconds(1.0f);
@@ -167,46 +154,102 @@ public class PlayerHealth : MonoBehaviour
         canTakeDamage = true;
     }
 
-    // Method to gain health
     public void GainHealth(int amount)
     {
-        // Increment the current health by the specified amount
         currentHealth += amount;
-
-        // Clamp the current health to not exceed the maximum health
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
 
-    // Method to handle player's death
     private void Die()
     {
         if (!isDead)
         {
-            // Set the flag to indicate that the player is dead
             isDead = true;
-
-            // Set the "isDead" parameter in the Animator to true to play the death animation
             animator.SetBool("isDead", true);
-
-            // Optionally, you can add a delay before reloading the scene or other game over actions
-            Invoke("ReloadScene", 6.0f);
-
-            // Disable player controls and interactions
             DisablePlayer();
-
-            // Disable all UI elements
             DisableUI();
+            DisableAllChildren(); // Disable children here
+            StartCoroutine(DesaturateSceneCoroutine());
+            DestroyEnemiesAndBullets();
+
+            // Roll for revival chance
+            if (Random.Range(0, 100) < revivalChance)
+            {
+                Debug.Log("Player revived!");
+                Invoke("Revive", 6.0f); // Adjust this delay as needed
+            }
+            else
+            {
+                Debug.Log("Player did not revive.");
+                Invoke("LoadDeathScreen", 3.0f); // Load DeathScreen after 3 seconds
+            }
         }
     }
 
-    void DisablePlayer()
+    private void LoadDeathScreen()
+    {
+        SceneManager.LoadScene("DeathScreen");
+    }
+
+    private void Revive()
+    {
+        animator.SetBool("isRevived", true);
+        animator.SetBool("isDead", false);
+
+        // Restore health to maximum
+        currentHealth = maxHealth;
+
+        StartCoroutine(RestoreSaturation());
+
+        // Do not enable children here; use animation events instead
+        StartCoroutine(RevivalDelay());
+    }
+
+    private IEnumerator RevivalDelay()
+    {
+        yield return new WaitUntil(() => !animator.GetCurrentAnimatorStateInfo(0).IsName("RevivalAnimation")); // Ensure RevivalAnimation is finished
+        EnablePlayer();
+        // The children will be re-enabled by the animation event
+    }
+
+    public void FullyRevived()
+    {
+        isRevived = false;
+        animator.SetBool("isRevived", false);
+    }
+
+    private IEnumerator DesaturateSceneCoroutine()
+    {
+        float startTime = Time.time;
+
+        while (Time.time < startTime + desaturationDuration && colorAdjustments != null)
+        {
+            float t = (Time.time - startTime) / desaturationDuration;
+            colorAdjustments.saturation.value = Mathf.Lerp(100.0f, -100.0f, t);
+            yield return null;
+        }
+    }
+
+    private IEnumerator RestoreSaturation()
+    {
+        float startTime = Time.time;
+
+        while (Time.time < startTime + desaturationDuration && colorAdjustments != null)
+        {
+            float t = (Time.time - startTime) / desaturationDuration;
+            colorAdjustments.saturation.value = Mathf.Lerp(-100.0f, 100.0f, t);
+            yield return null;
+        }
+    }
+
+    private void DisablePlayer()
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocity = Vector2.zero; // Stop rigidbody movement
-            rb.gravityScale = 0f; // Disable gravity (if applicable)
-            rb.isKinematic = true; // Make the rigidbody kinematic
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0f;
+            rb.isKinematic = true;
         }
 
         PMovement2 myScriptComponentOne = GetComponent<PMovement2>();
@@ -227,78 +270,46 @@ public class PlayerHealth : MonoBehaviour
             myScriptComponentThree.enabled = false;
         }
 
-        DisableAllChildren();
+        DisableUI();  // UI disabling is enough
     }
 
-    // Coroutine to gradually desaturate the scene colors
-    private System.Collections.IEnumerator DesaturateSceneCoroutine()
+    private void EnablePlayer()
     {
-        float startTime = Time.time;
-
-        while (Time.time < startTime + desaturationDuration && colorAdjustments != null)
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            float t = (Time.time - startTime) / desaturationDuration;
-
-            // Linearly interpolate between the current saturation and -100 (completely desaturated)
-            colorAdjustments.saturation.value = Mathf.Lerp(0.0f, -100.0f, t);
-
-            yield return null;
+            rb.gravityScale = 1f;
+            rb.isKinematic = false;
         }
-    }
 
-    void FreezeAllEnemies()
-    {
-        // Find all game objects with the tag "Enemy"
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        // Iterate through each enemy and deactivate all relevant components
-        foreach (GameObject enemy in enemies)
+        PMovement2 myScriptComponentOne = GetComponent<PMovement2>();
+        if (myScriptComponentOne != null)
         {
-            // Disable the entire GameObject
-            enemy.SetActive(false);
+            myScriptComponentOne.enabled = true;
         }
-    }
 
-    private void DisableAllChildren()
-    {
-        // Get all child transforms of the player
-        Transform[] children = GetComponentsInChildren<Transform>();
-
-        // Disable all children, excluding the player's own transform
-        foreach (Transform child in children)
+        Shooting myScriptComponentTwo = GetComponent<Shooting>();
+        if (myScriptComponentTwo != null)
         {
-            if (child != transform)
-            {
-                child.gameObject.SetActive(false);
-            }
+            myScriptComponentTwo.enabled = true;
         }
-    }
 
-    private void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        AimMouseWeapon myScriptComponentThree = GetComponent<AimMouseWeapon>();
+        if (myScriptComponentThree != null)
+        {
+            myScriptComponentThree.enabled = true;
+        }
     }
 
     public void StartBlocking()
     {
         if (!isBlocking && blockCooldownTimer <= 0.0f && (playerMovementScript == null || !playerMovementScript.playerDash))
         {
-            // Set the flag to indicate that the player is blocking
             isBlocking = true;
-
-            // Set the "isBlocking" parameter in the Animator to true to play the blocking animation
             animator.SetBool("isBlocking", true);
-
-            // Optionally, you can add a delay before blocking ends or other actions
-            // Invoke("StopBlocking", 2.0f);
-
-            // Start cooldown timer
             blockCooldownTimer = blockCooldown;
-
-            // Stop taking damage during blocking
             canTakeDamage = false;
 
-            // Freeze the player's position during blocking
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -306,20 +317,14 @@ public class PlayerHealth : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezePosition;
             }
 
-            // Trigger animation event to stop damage
             animator.SetTrigger("StopDamage");
         }
     }
 
-    // Animation event method to resume taking damage
     public void ResumeDamage()
     {
-        // Resume taking damage after blocking animation finishes
         canTakeDamage = true;
-
-        // Trigger animation event to resume damage
         animator.SetTrigger("ResumeDamage");
-
         isBlocking = false;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -332,35 +337,109 @@ public class PlayerHealth : MonoBehaviour
         animator.SetBool("isBlocking", false);
     }
 
-    // Inside the PlayerHealth class
     public bool IsBlocking()
     {
         return isBlocking;
     }
 
-    // Inside the PlayerHealth class
     public void RollHealthPause()
     {
-        // Stop taking damage during rolling
         canTakeDamage = false;
     }
 
-    // Inside the PlayerHealth class
     public void RollHealthResume()
     {
-        // Resume taking damage after rolling animation finishes
         canTakeDamage = true;
     }
 
-    // Method to toggle invincibility
     private void ToggleInvincibility()
     {
-        isInvincible = !isInvincible; // Toggle invincibility
+        isInvincible = !isInvincible;
 
-        // Enable or disable the invincibility text object
         if (invincibilityText != null)
         {
-            invincibilityText.gameObject.SetActive(isInvincible); // Show text when invincible
+            invincibilityText.gameObject.SetActive(isInvincible);
+        }
+    }
+
+    private void DestroyEnemiesAndBullets()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject bullet in bullets)
+        {
+            Destroy(bullet);
+        }
+    }
+
+    // Method to get the current revival chance
+    public int GetRevivalChance()
+    {
+        return revivalChance;
+    }
+
+    // Method to set the revival chance
+    public void SetRevivalChance(int chance)
+    {
+        revivalChance = Mathf.Clamp(chance, 0, 100);
+        Debug.Log("Revival chance set to: " + revivalChance + "%");
+    }
+
+    // Animation event functions
+    public void DisableChildren()
+    {
+        DisableAllChildren();
+    }
+
+    public void EnableChildren()
+    {
+        EnableAllChildren();
+    }
+
+    private void DisableAllChildren()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+    private void EnableAllChildren()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+
+    // New method to update health icon based on player's current health
+    private void UpdateHealthIcon()
+    {
+        if (healthIconAnimator != null)
+        {
+            if (currentHealth > 300)
+            {
+                healthIconAnimator.SetBool("strongHead", true);
+                healthIconAnimator.SetBool("damagedHead", false);
+                healthIconAnimator.SetBool("weakHead", false);
+            }
+            else if (currentHealth > 100)
+            {
+                healthIconAnimator.SetBool("strongHead", false);
+                healthIconAnimator.SetBool("damagedHead", true);
+                healthIconAnimator.SetBool("weakHead", false);
+            }
+            else
+            {
+                healthIconAnimator.SetBool("strongHead", false);
+                healthIconAnimator.SetBool("damagedHead", false);
+                healthIconAnimator.SetBool("weakHead", true);
+            }
         }
     }
 }
